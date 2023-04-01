@@ -20,7 +20,8 @@ end
 end
 
 10.times do
-    painting = Painting.create(name: "Painting of #{Faker::Name.first_name}", bio: "Super cool picture!", img_url: "#{Faker::LoremFlickr.image}", year: "1997", user_id: User.find_by(id: rand(1..User.count)), museum_id: Museum.find_by(id: rand(1..Museum.count)))
+    painting = Painting.create(name: "Painting of #{Faker::Name.first_name}", bio: "Super cool picture!", img_url: "#{Faker::LoremFlickr.image}", year: rand(2006..2023),
+    user_id: rand(1..User.count), museum_id: rand(1..Museum.count))
 end
 
 pp "Done Seeding!"
