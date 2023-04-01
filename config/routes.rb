@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+  #General Resources
+  resources :paintings, only: [:index]
+  resources :museums, only: [:index]
+
+  #User Routing, signups, profile, login, logout
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
