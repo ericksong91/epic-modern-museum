@@ -5,3 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+# Make Users
+
+pp "Now Seeding...."
+
+5.times do
+    user = User.create(username: "#{Faker::Name.first_name}##{rand(1000...9999)}", password:"asdf", 
+        password_confirmation: "asdf", bio: "#{Faker::Lorem.paragraphs(number:1)}")
+end
+
+3.times do
+    museum = Museum.create(name: "Museum of #{Faker::Name.first_name}", location: "#{Faker::Address.city}", bio: "#{Faker::Lorem.paragraphs(number:1)}")
+end
+
+10.times do
+    painting = Painting.create(name: "Painting of #{Faker::Name.first_name}", bio: "Super cool picture!", img_url: "#{Faker::LoremFlickr.image}", year: "1997", user_id: User.find_by(id: rand(1..User.count)), museum_id: Museum.find_by(id: rand(1..Museum.count)))
+end
+
+pp "Done Seeding!"
+
