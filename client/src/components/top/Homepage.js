@@ -7,11 +7,18 @@ function Homepage() {
     useEffect(() => {
         fetch("/museums")
             .then((r) => r.json())
-            .then((data) => console.log(data))
+            .then((data) => setMuseums(data))
+            .catch(() => alert("Error!"))
     }, [])
+
+    const museumList = museums.map((museum)=>{
+        return <li>{museum.name}</li>
+    })
+
 
     return (
         <div className="Homepage">
+            {museumList}
         </div>
     );
 }
