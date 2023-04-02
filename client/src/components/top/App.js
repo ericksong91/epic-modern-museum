@@ -1,4 +1,5 @@
 import Navbar from './Navbar'
+import Homepage from './Homepage'
 
 import '../../css/App.css';
 import {
@@ -9,8 +10,9 @@ import {
 function App() {
   return (
     <div className="App">
+      <Navbar />
       <Routes>
-        <Route path='/' element={<Navbar />} />
+        <Route path='/' element={<Homepage />} />
       </Routes>
     </div>
   );
