@@ -1,38 +1,38 @@
-# pp "Destroying old data..."
+pp "Destroying old data..."
 
-# #Destroying Data
-# Painting.destroy_all
-# User.destroy_all
-# Museum.destroy_all
+#Destroying Data
+Painting.destroy_all
+User.destroy_all
+Museum.destroy_all
 
-# #Requirements
-# require 'faker'
+#Requirements
+require 'faker'
 
-# pp "Now Seeding Users..."
+pp "Now Seeding Users..."
 
-# 5.times do
-#     user = User.create!(username: "#{Faker::Name.first_name}##{rand(1000...9999)}", password:"asdf", 
-#         password_confirmation: "asdf", bio: "#{Faker::Lorem.paragraphs(number:1)}")
-# end
+5.times do
+    user = User.create!(username: "#{Faker::Name.first_name}##{rand(1000...9999)}", password:"asdf", 
+        password_confirmation: "asdf", bio: "#{Faker::Lorem.paragraphs(number:1)}")
+end
 
-# pp "Now Seeding Museums..."
+pp "Now Seeding Museums..."
 
-# 3.times do
-#     museum = Museum.create!(name: "Museum of #{Faker::Name.first_name}", location: "#{Faker::Address.city}", bio: "#{Faker::Lorem.paragraphs(number:1)}")
-# end
+3.times do
+    museum = Museum.create!(name: "Museum of #{Faker::Name.first_name}", location: "#{Faker::Address.city}", bio: "#{Faker::Lorem.paragraphs(number:1)}")
+end
 
-# pp "Now Seeding Paintings..."
+pp "Now Seeding Paintings..."
 
-# 10.times do
-#     painting = Painting.create!(name: "Painting of #{Faker::Name.first_name}", bio: "Super cool picture!", img_url: "#{Faker::LoremFlickr.image}", year: rand(2006..2023),
-#     user_id: rand(User.first.id..User.last.id), museum_id: rand(Museum.first.id..Museum.last.id))
-# end
+10.times do
+    painting = Painting.create!(name: "Painting of #{Faker::Name.first_name}", bio: "Super cool picture!", img_url: "#{Faker::LoremFlickr.image}", year: rand(2006..2023),
+    user_id: rand(User.first.id..User.last.id), museum_id: rand(Museum.first.id..Museum.last.id))
+end
 
-# pp "Done Seeding!"
+pp "Done Seeding!"
 
-Museum.create!(name: 'Black-Capped Chickadee', bio: 'Poecile Atricapillus', location: "France")
-Museum.create!(name: 'Grackle', bio:'Quiscalus Quiscula', location: "France")
-Museum.create!(name: 'Common Starling', bio:'Sturnus Vulgaris', location: "France")
-Museum.create!(name: 'Mourning Dove', bio:'Zenaida Macroura', location: "France")
+# Museum.create!(name: 'Black-Capped Chickadee', bio: 'Poecile Atricapillus', location: "France")
+# Museum.create!(name: 'Grackle', bio:'Quiscalus Quiscula', location: "France")
+# Museum.create!(name: 'Common Starling', bio:'Sturnus Vulgaris', location: "France")
+# Museum.create!(name: 'Mourning Dove', bio:'Zenaida Macroura', location: "France")
 
-pp "Done seeding!"
+# pp "Done seeding!"
