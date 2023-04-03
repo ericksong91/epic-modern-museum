@@ -9,5 +9,7 @@ cp -a client/build/. public/
 
 # builds the back end code
 bundle install
+bundle exec rails db:drop
+bundle exec rails db:create
 bundle exec rails db:migrate
 bundle exec rails db:seed # if you have seed data, run this command for the initial deploy only
