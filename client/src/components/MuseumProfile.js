@@ -12,11 +12,11 @@ function MuseumProfile({ museums }) {
 
     useEffect(() => {
         museums.length === 0 ? setPaintings([]) : setPaintings(museumObj.paintings)
-    }, [index, museums])
+    }, [index, museums, museumObj.paintings])
 
     //Filter paintings from Museum
     const paintingsFilter = paintings.map((paint) => {
-        return <li>{paint.name}</li>
+        return <li key={paint.id}>{paint.name}</li>
     })
 
     return (
