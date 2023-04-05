@@ -4,8 +4,8 @@ import Button from '@mui/material/Button';
 function Museums({ museums }) {
     const museumList = museums.map((museum) => {
         return (
-            <Link to={`/users/${museum.id}`}>
-                <Button variant="contained"><h2 key={museum.id}>{museum.name}</h2></Button>
+            <Link to={`/museums/${museum.id}`} key={museum.id}>
+                <Button variant="contained"><h2>{museum.name}</h2></Button>
             </Link>
         )
     })
