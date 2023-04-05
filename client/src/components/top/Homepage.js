@@ -1,24 +1,13 @@
 import '../../css/App.css';
-import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom"
+import Button from '@mui/material/Button';
 
 function Homepage() {
-    const [museums, setMuseums] = useState([]);
-
-    useEffect(() => {
-        fetch("/museums")
-            .then((r) => r.json())
-            .then((data) => setMuseums(data))
-            .catch(() => alert("Error!"))
-    }, [])
-
-    const museumList = museums.map((museum)=>{
-        return <li>{museum.name}</li>
-    })
-
 
     return (
         <div className="Homepage">
-            {museumList}
+            <Link to={'/museums'}><Button variant="contained">Explore Museums as a Guest</Button></Link>
+            <Button variant="contained">Artist Login</Button>
         </div>
     );
 }
