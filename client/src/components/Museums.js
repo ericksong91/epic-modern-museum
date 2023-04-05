@@ -14,6 +14,8 @@ function Museums({ museums }) {
         <div className="Museums">
             <h1>Here is a list of all museums:</h1>
             {museumList}
+
+            <Link to={"/"}><Button variant="contained">Return to Home</Button></Link>
         </div>
     );
 }
