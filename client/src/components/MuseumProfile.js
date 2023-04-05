@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Button from '@mui/material/Button';
 
 function MuseumProfile({ museums }) {
@@ -29,6 +29,8 @@ function MuseumProfile({ museums }) {
 
             <h2>List of Paintings:</h2>
             {paintingsFilter}
+
+            <Link to={'/museums'}><Button variant="contained">Return Home</Button></Link>
 
         </div>
     );
