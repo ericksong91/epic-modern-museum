@@ -1,38 +1,32 @@
-import { Link, useParams } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 import Button from '@mui/material/Button';
 
 function MuseumProfile({ museums }) {
-    const museumId = parseInt(useParams().id)
+    const index = parseInt(useParams().id);
+    const museumObj = museums.find((museum)=> museum.id === index)
+    const [paintings, setPaintings] = useState([]);
 
-    //Filter museum from list
-    const museumFilter = museums.filter((museum)=>{
-        return museum.id === museumId
-    })
-
+    useEffect(()=>{
+        museums.length === 0 ? setPaintings([]) : setPaintings(museumObj.paintings)
+    }, [index, museums])
 
     //Filter paintings from Museum
-    const paintingsFilter = museumFilter[0].paintings.map((paint)=>{
+    const paintingsFilter = paintings.map((paint)=>{
         return <li>{paint.name}</li>
     })
 
-    //Filter users from Museum
-    const usersFilter = museumFilter[0].users.map((user)=>{
-        return <li>{user.username}</li>
-    })
-
+    console.log(museumObj)
 
     return (
         <div className="MuseumProfile">
             <h1>You have arrived!</h1>
-            <h2>{museumFilter[0].name}</h2>
-            <h2>{museumFilter[0].location}</h2>
-            <h3>{museumFilter[0].bio}</h3>
+            <h2>{museumObj.location}</h2>
+            <h2>{museumObj.name}</h2>
+            <h3>{museumObj.bio}</h3>
 
             <h2>List of Paintings:</h2>
             {paintingsFilter}
-
-            <h2>List of our Great Artists:</h2>
-            {usersFilter}
             
         </div>
     );
