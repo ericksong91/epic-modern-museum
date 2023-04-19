@@ -12,13 +12,13 @@ pp "Now Seeding Users..."
 
 5.times do
     user = User.create!(username: "#{Faker::Name.first_name}##{rand(1000...9999)}", password:"asdf", 
-        password_confirmation: "asdf", bio: "#{Faker::Lorem.paragraphs(number:1)}")
+        password_confirmation: "asdf", bio: "#{Faker::Lorem.paragraphs(number:1)[0]}")
 end
 
 pp "Now Seeding Museums..."
 
 3.times do
-    museum = Museum.create!(name: "Museum of #{Faker::Name.first_name}", location: "#{Faker::Address.city}", bio: "#{Faker::Lorem.paragraphs(number:1)}")
+    museum = Museum.create!(name: "Museum of #{Faker::Name.first_name}", location: "#{Faker::Address.city}", bio: "#{Faker::Lorem.paragraphs(number:1)[0]}")
 end
 
 pp "Now Seeding Paintings..."
