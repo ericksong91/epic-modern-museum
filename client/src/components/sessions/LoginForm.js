@@ -8,8 +8,6 @@ function LoginForm() {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  //test
-
   return (
     <div className="LoginForm">
       <h1>Hello</h1>
