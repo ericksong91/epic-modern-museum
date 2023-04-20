@@ -29,10 +29,3 @@ pp "Now Seeding Paintings..."
 end
 
 pp "Done Seeding!"
-
-# Museum.create!(name: 'Black-Capped Chickadee', bio: 'Poecile Atricapillus', location: "France")
-# Museum.create!(name: 'Grackle', bio:'Quiscalus Quiscula', location: "France")
-# Museum.create!(name: 'Common Starling', bio:'Sturnus Vulgaris', location: "France")
-# Museum.create!(name: 'Mourning Dove', bio:'Zenaida Macroura', location: "France")
-
-# pp "Done seeding!"
