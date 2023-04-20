@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
-import Navbar from './Navbar'
-import Homepage from './Homepage'
-import Museums from '../Museums'
-import MuseumProfile from '../MuseumProfile'
+import Navbar from './Navbar';
+import Homepage from './Homepage';
+import Museums from '../Museums';
+import MuseumProfile from '../MuseumProfile';
+import LoginForm from '../sessions/LoginForm';
 
 import '../../css/App.css';
 import {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/' element={<Homepage />} />
         <Route path={'/museums'} element={<Museums museums={museums} />} />
         <Route path={'/museums/:id'} element={<MuseumProfile museums={museums} />} />
+        <Route path={'/login'} element={<LoginForm />} />
       </Routes>
     </div>
   );
