@@ -10,6 +10,7 @@ function UserProvider({ children }) {
             .then(res => res.json())
             .then(data => {
                 setUser(data)
+                //Add a fetch to gather the user's data later
             })
     }, [])
 
