@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Box, TextField } from '@mui/material';
+import { Button, Container, Box, TextField } from '@mui/material';
 
 
 function LoginForm() {
@@ -8,8 +8,27 @@ function LoginForm() {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleSubmit(){
-    console.log("Submitted!")
+  function handleSubmit(e) {
+    e.preventDefault();
+    setIsLoading(true);
+
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ username, password })
+    })
+      .then((r) => {
+        setIsLoading(false);
+        if (r.ok) {
+          r.json()
+            .then((user) => console.log(user));
+        } else {
+          r.json()
+            .then((error) => setErrors(error.errors));
+        }
+      });
   }
 
   return (
@@ -23,7 +42,7 @@ function LoginForm() {
         }}
       >
         <h1>Log In</h1>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit}>
           <TextField
             margin="normal"
             required
@@ -34,7 +53,7 @@ function LoginForm() {
             autoComplete="user"
             autoFocus
             value={username}
-            onChange={(e)=>setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <TextField
             margin="normal"
@@ -45,8 +64,17 @@ function LoginForm() {
             label="Password"
             type="password"
             value={password}
-            onChange={(e)=>{setPassword(e.target.value)}}
+            onChange={(e) => { setPassword(e.target.value) }}
           />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            {isLoading ? "Loading..." : "Login"}
+          </Button>
+          {errors}
         </Box>
       </Box>
     </Container>
