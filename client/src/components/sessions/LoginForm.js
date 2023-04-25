@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, TextField } from '@mui/material';
+import { Container, Box, TextField } from '@mui/material';
 
 
 function LoginForm() {
@@ -8,23 +8,48 @@ function LoginForm() {
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  return (
-    <div className="LoginForm">
-      <h1>Hello</h1>
-      <Box
-        component="form"
-        sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <TextField id="outlined-basic" label="Login" variant="outlined" />
-        <TextField id="outlined-basic" label="Password" variant="outlined" />
-      </Box>
-    
+  function handleSubmit(){
+    console.log("Submitted!")
+  }
 
-    </div>
+  return (
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <h1>Log In</h1>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="user"
+            label="Username"
+            name="user"
+            autoComplete="user"
+            autoFocus
+            value={username}
+            onChange={(e)=>setUsername(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e)=>{setPassword(e.target.value)}}
+          />
+        </Box>
+      </Box>
+    </Container>
   );
 }
 
