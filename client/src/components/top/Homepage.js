@@ -1,20 +1,11 @@
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import '../../css/App.css';
 import { Link } from "react-router-dom"
 import Button from '@mui/material/Button';
 import { UserContext } from '../context/user';
 
 function Homepage() {
-    const { user, setUser } = useContext(UserContext);
-
-    useEffect(() => {
-        fetch("/me").then((r) => {
-            if (r.ok) {
-                r.json()
-                    .then((user) => setUser(user));
-            }
-        });
-    }, [setUser]);
+    const { user } = useContext(UserContext);
 
     return (
         <div className="Homepage">
