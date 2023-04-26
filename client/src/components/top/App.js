@@ -4,6 +4,7 @@ import Homepage from './Homepage';
 import Museums from '../Museums';
 import MuseumProfile from '../MuseumProfile';
 import LoginForm from '../sessions/LoginForm';
+import Profile from '../top/Profile';
 import '../../css/App.css';
 import {
   Routes,
@@ -25,9 +26,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path='/' element={<Homepage />} />
-        <Route path={'/museums'} element={<Museums museums={museums} />} />
-        <Route path={'/museums/:id'} element={<MuseumProfile museums={museums} />} />
-        <Route path={'/login'} element={<LoginForm />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path='/museums' element={<Museums museums={museums} />} />
+        <Route path='/museums/:id' element={<MuseumProfile museums={museums} />} />
+        <Route path='/login' element={<LoginForm />} />
       </Routes>
     </div>
   );

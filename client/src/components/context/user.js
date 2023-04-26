@@ -3,14 +3,13 @@ import React, { useState, useEffect } from 'react';
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         fetch('/me')
             .then(res => res.json())
             .then(data => {
                 setUser(data)
-                //Add a fetch to gather the user's data later
             })
     }, [])
 
