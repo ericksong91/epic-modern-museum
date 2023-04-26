@@ -18,9 +18,10 @@ function Homepage() {
 
     return (
         <div className="Homepage">
-            <Link to={'/museums'}><Button variant="contained">Explore Museums as a Guest</Button></Link>
-            {!user ? <Link to={'/login'}><Button variant="contained">Artist Login</Button></Link> : 
-            <Link to={'/profile'}><Button variant="contained">Artist Profile</Button></Link>}
+            {!user ? <Link to={'/museums'}><Button variant="contained">Explore Museums as a Guest</Button></Link> :
+                <Link to={'/museums'}><Button variant="contained">Explore Museums</Button></Link>}
+            {!user ? <Link to={'/login'}><Button variant="contained">Artist Login</Button></Link> :
+                <Link to={'/profile'}><Button variant="contained">Artist Profile</Button></Link>}
         </div>
     );
 }
