@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Button, Container, Box, TextField } from '@mui/material';
+import { UserContext } from '../context/user';
 
 
 function LoginForm() {
@@ -7,6 +8,7 @@ function LoginForm() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const { setUser } = useContext(UserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -23,7 +25,7 @@ function LoginForm() {
         setIsLoading(false);
         if (r.ok) {
           r.json()
-            .then((user) => console.log(user));
+            .then((data) => setUser(data));
         } else {
           r.json()
             .then((error) => setErrors(error.errors));
