@@ -6,13 +6,15 @@
 
 import { useContext } from "react";
 import { UserContext } from "../context/user";
+import { Button } from "@mui/material";
 
 function Navbar() {
-  const { user } = useContext(UserContext);
+  const { user, logout } = useContext(UserContext);
 
   return (
     <div className="Navbar">
-        <h1>{user ? user.username : null}'s Navbar</h1>
+      {!user ? <h1>Navbar</h1> : <h1>{user.username}'s Navbar</h1>}
+      {!user ? null : <Button variant="contained" onClick={logout}>Logout</Button>}
     </div>
   );
 }
