@@ -15,6 +15,8 @@ pp "Now Seeding Users..."
         password_confirmation: "asdf", bio: "#{Faker::Lorem.paragraphs(number:1)[0]}")
 end
 
+user = User.create!(username: "Eric", password:"asdf", password_confirmation: "asdf", bio: "Random artist! wahoo!")
+
 pp "Now Seeding Museums..."
 
 3.times do
