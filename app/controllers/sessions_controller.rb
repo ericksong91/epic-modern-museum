@@ -14,8 +14,8 @@ class SessionsController < ApplicationController
 
     #logout
     def destroy
-        user = User.find_by(username: params[:username])
-
+        user = User.find_by(id: session[:user_id])
+        
         if user
             session.delete :user_id
             head :no_content
