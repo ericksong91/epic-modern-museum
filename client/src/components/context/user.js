@@ -4,6 +4,7 @@ const UserContext = React.createContext();
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         fetch('/me')
@@ -15,9 +16,7 @@ function UserProvider({ children }) {
     }, [])
 
     function logout() {
-        fetch("/logout", {
-            method: "DELETE"
-        })
+        fetch("/logout", { method: "DELETE" })
             .then((r) => {
                 if (r.ok) {
                     setUser(null)
@@ -25,8 +24,27 @@ function UserProvider({ children }) {
             })
     }
 
+    function login(username, password, setIsLoading) {
+        setErrors(null);
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ username, password })
+        })
+            .then((r) => {
+                setIsLoading(false)
+                if (r.ok) {
+                    r.json().then((data) => setUser(data));
+                } else {
+                    r.json().then((error) => setErrors(error.errors));
+                }
+            });
+    }
+
     return (
-        <UserContext.Provider value={{ user, setUser, logout }}>
+        <UserContext.Provider value={{ user, errors, setUser, logout, login }}>
             {children}
         </UserContext.Provider>
     )
