@@ -5,8 +5,6 @@ import '../../css/App.css';
 function Profile() {
     const { user } = useContext(UserContext);
 
-    console.log(user)
-
     const userPaintings = user.paintings.map((paint) => <li>{paint.name}</li>)
     const userMuseums = user.museums.map((muse) => <li>{muse.name}</li>)
 
