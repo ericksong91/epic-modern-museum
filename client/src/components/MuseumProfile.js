@@ -34,7 +34,6 @@ function MuseumProfile({ museums }) {
                 <Grid container spacing={4}>
                     {paintingsFilter}
                 </Grid>
-                <Link to={'/museums'}><Button variant="contained">Return Home</Button></Link>
             </Container>
         </div>
     );
