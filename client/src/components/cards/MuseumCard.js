@@ -18,6 +18,7 @@ function MuseumCard({ paint }) {
             />
             <CardContent>
                 {bio}
+                <Button variant="contained">Learn more</Button>
             </CardContent>
         </Card>
     );

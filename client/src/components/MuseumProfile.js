@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import MuseumCard from "./MuseumCard";
-import Button from '@mui/material/Button';
-import { Grid, Container } from '@mui/material';
+import MuseumCard from "./cards/MuseumCard";
+import { Button, Grid, Container } from '@mui/material';
 
 function MuseumProfile({ museums }) {
     const index = parseInt(useParams().id);
