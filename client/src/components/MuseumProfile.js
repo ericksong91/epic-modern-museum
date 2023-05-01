@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import MuseumCard from "./MuseumCard";
 import Button from '@mui/material/Button';
-import { Grid } from '@mui/material';
+import { Grid, Container } from '@mui/material';
 
 function MuseumProfile({ museums }) {
     const index = parseInt(useParams().id);
@@ -18,23 +18,24 @@ function MuseumProfile({ museums }) {
 
     //Filter paintings from Museum
     const paintingsFilter = paintings.map((paint) => {
-        return <MuseumCard key={paint.id} paint={paint}/>
+        return <Grid item xs={12} sm={6} md={4}><MuseumCard key={paint.id} paint={paint} /></Grid>
     })
 
     return (
         <div className="MuseumProfile">
-            <h1>You have arrived!</h1>
+            <Container maxWidth="lg">
+                <h1>You have arrived!</h1>
 
-            <h2>{museumObj.location}</h2>
-            <h2>{museumObj.name}</h2>
-            <h3>{museumObj.bio}</h3>
+                <h2>{museumObj.location}</h2>
+                <h2>{museumObj.name}</h2>
+                <h3>{museumObj.bio}</h3>
 
-            <h2>List of Paintings:</h2>
-            <Grid container>
-                {paintingsFilter}
-            </Grid>
-            <Link to={'/museums'}><Button variant="contained">Return Home</Button></Link>
-
+                <h2>List of Paintings:</h2>
+                <Grid container spacing={4}>
+                    {paintingsFilter}
+                </Grid>
+                <Link to={'/museums'}><Button variant="contained">Return Home</Button></Link>
+            </Container>
         </div>
     );
 }
