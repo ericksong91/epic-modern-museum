@@ -12,10 +12,15 @@ function Navbar() {
         {!user ? <h1>Navbar</h1> : <h1>{user.username}'s Navbar</h1>}
         <Grid container spacing={2} justifyContent="center">
           <Grid item>
-            {!user ? null : <Link to="/"><Button variant="contained" onClick={logout}>Logout</Button></Link>}
+            {<Link to="/"><Button variant="contained">Return Home</Button></Link>}
           </Grid>
           <Grid item>
-            {<Link to="/"><Button variant="contained">Return Home</Button></Link>}
+            {<Link to="/museums"><Button variant="contained">View Museums</Button></Link>}
+          </Grid>
+          <Grid item>
+            {!user ? <Link to="/login"><Button variant="contained">Login</Button></Link>
+              :
+              <Link to="/"><Button variant="contained" onClick={logout}>Logout</Button></Link>}
           </Grid>
         </Grid>
       </Container>
