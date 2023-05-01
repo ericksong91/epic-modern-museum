@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
+
 
 function Museums({ museums }) {
     const museumList = museums.map((museum) => {

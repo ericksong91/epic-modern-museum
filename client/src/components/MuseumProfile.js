@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import MuseumCard from "./MuseumCard";
 import Button from '@mui/material/Button';
+import { Grid } from '@mui/material';
 
 function MuseumProfile({ museums }) {
     const index = parseInt(useParams().id);
@@ -16,7 +18,7 @@ function MuseumProfile({ museums }) {
 
     //Filter paintings from Museum
     const paintingsFilter = paintings.map((paint) => {
-        return <li key={paint.id}>{paint.name}</li>
+        return <MuseumCard key={paint.id} paint={paint}/>
     })
 
     return (
@@ -28,8 +30,9 @@ function MuseumProfile({ museums }) {
             <h3>{museumObj.bio}</h3>
 
             <h2>List of Paintings:</h2>
-            {paintingsFilter}
-
+            <Grid container>
+                {paintingsFilter}
+            </Grid>
             <Link to={'/museums'}><Button variant="contained">Return Home</Button></Link>
 
         </div>
