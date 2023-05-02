@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import MuseumCard from "./cards/MuseumCard";
+import PaintingCard from "./cards/PaintingCard";
 import { Button, Grid, Container } from '@mui/material';
 
 function MuseumProfile({ museums }) {
@@ -17,7 +17,7 @@ function MuseumProfile({ museums }) {
 
     //Filter paintings from Museum
     const paintingsFilter = paintings.map((paint) => {
-        return <Grid item xs={12} sm={6} md={4}><MuseumCard key={paint.id} paint={paint} /></Grid>
+        return <Grid item xs={12} sm={6} md={4}><PaintingCard key={paint.id} paint={paint} /></Grid>
     })
 
     return (

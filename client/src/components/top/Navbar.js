@@ -9,7 +9,7 @@ function Navbar() {
   return (
     <div className="Navbar">
       <Container maxWidth="lg">
-        {!user ? <h1>Navbar</h1> : <h1>Welcome {user.username}!</h1>}
+        {!user ? <h2>Welcome, Guest!</h2> : <h2>Welcome, {user.username}!</h2>}
         <Grid container spacing={2} justifyContent="center">
           <Grid item>
             {<Link to="/"><Button variant="contained">Return Home</Button></Link>}

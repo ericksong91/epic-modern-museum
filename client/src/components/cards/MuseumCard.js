@@ -1,25 +1,20 @@
-import Button from '@mui/material/Button';
-import { Card, CardContent, CardHeader, CardMedia } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Button, Card, CardContent, CardHeader, CardMedia } from '@mui/material';
 
 
-function MuseumCard({ paint }) {
-    const { bio, id, img_url, museum_id, user_id, name } = paint;
+function MuseumCard({ museum }) {
+    const { bio, id, location, name } = museum;
 
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
                 title={name}
             />
-            <CardMedia
-                component="img"
-                height="300"
-                image={img_url}
-                alt={name}
-            />
             <CardContent>
                 {bio}
-                <Button variant="contained">Learn more</Button>
+                {location}
             </CardContent>
+            <Link to={`/museums/${museum.id}`} key={museum.id}><Button variant="contained">Explore!</Button></Link>
         </Card>
     );
 }
