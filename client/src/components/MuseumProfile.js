@@ -13,7 +13,7 @@ function MuseumProfile({ museums }) {
 
     useEffect(() => {
         museums.length === 0 ? setPaintings([]) : setPaintings(museumObj.paintings)
-    }, [index, museums, museumObj.paintings])
+    }, [museums]);
 
     const paintingsList = paintings.map((paint) => {
         return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} /></Grid>
