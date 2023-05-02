@@ -6,7 +6,7 @@ import { Button, Grid } from '@mui/material';
 function Museums({ museums }) {
     const museumList = museums.map((museum) => {
         return (
-            <Grid item><MuseumCard key={museum.id} museum={museum} /></Grid>
+            <Grid item xs={12} sm={6} md={4}><MuseumCard key={museum.id} museum={museum} /></Grid>
         )
     })
 
@@ -16,7 +16,6 @@ function Museums({ museums }) {
             <Grid container spacing={2} justifyContent={"center"}>
                 {museumList}
             </Grid>
-            <Link to={"/"}><Button variant="contained">Return to Home</Button></Link>
         </div>
     );
 }
