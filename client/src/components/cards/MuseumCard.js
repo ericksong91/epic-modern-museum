@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Button, Card, CardContent, CardHeader, CardMedia } from '@mui/material';
+import { Button, Card, CardContent, CardHeader } from '@mui/material';
 
 
 function MuseumCard({ museum }) {

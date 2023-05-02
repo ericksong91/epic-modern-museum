@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PaintingCard from "./cards/PaintingCard";
-import { Button, Grid, Container } from '@mui/material';
+import { Grid, Container } from '@mui/material';
 
 function MuseumProfile({ museums }) {
     const index = parseInt(useParams().id);
@@ -15,8 +15,7 @@ function MuseumProfile({ museums }) {
         museums.length === 0 ? setPaintings([]) : setPaintings(museumObj.paintings)
     }, [index, museums, museumObj.paintings])
 
-    //Filter paintings from Museum
-    const paintingsFilter = paintings.map((paint) => {
+    const paintingsList = paintings.map((paint) => {
         return <Grid item xs={12} sm={6} md={4}><PaintingCard key={paint.id} paint={paint} /></Grid>
     })
 
@@ -29,7 +28,7 @@ function MuseumProfile({ museums }) {
 
                 <h2>Gallery</h2>
                 <Grid container spacing={4}>
-                    {paintingsFilter}
+                    {paintingsList}
                 </Grid>
             </Container>
         </div>

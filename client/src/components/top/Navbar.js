@@ -15,10 +15,17 @@ function Navbar() {
             {<Link to="/"><Button variant="contained">Return Home</Button></Link>}
           </Grid>
           <Grid item>
-            {<Link to="/locations"><Button variant="contained">View Museums</Button></Link>}
+            {!user ? <Link to="/locations"><Button variant="contained">View Museums</Button></Link>
+              :
+              <Link to="/profile"><Button variant="contained">My Profile</Button></Link>}
           </Grid>
           <Grid item>
             {!user ? <Link to="/login"><Button variant="contained">Login</Button></Link>
+              :
+              <Link to="/locations"><Button variant="contained">View Museums</Button></Link>}
+          </Grid>
+          <Grid item>
+            {!user ? null
               :
               <Link to="/"><Button variant="contained" onClick={logout}>Logout</Button></Link>}
           </Grid>
