@@ -23,13 +23,11 @@ function MuseumProfile({ museums }) {
     return (
         <div className="MuseumProfile">
             <Container maxWidth="lg">
-                <h1>You have arrived!</h1>
-
-                <h2>{museumObj.location}</h2>
-                <h2>{museumObj.name}</h2>
+                <h1>You have arrived at the {museumObj.name}!</h1>
                 <h3>{museumObj.bio}</h3>
+                <h3>Located at {museumObj.location}</h3>
 
-                <h2>List of Paintings:</h2>
+                <h2>Gallery</h2>
                 <Grid container spacing={4}>
                     {paintingsFilter}
                 </Grid>

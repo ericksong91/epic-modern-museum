@@ -17,17 +17,17 @@ function LoginForm() {
     login(username, password, setIsLoading);
   }
 
-  if(user) {
+  if (user) {
     return (
-      <div>
+      <Container className='LoginPage' component="main" maxWidth="xs">
         <h1>Logged in as {user.username}.</h1>
         <Link to="/"><Button variant="contained">Return Home</Button></Link>
-      </div>
+      </Container>
     )
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container className='LoginPage' component="main" maxWidth="xs">
       <Box
         sx={{
           marginTop: 8,
