@@ -1,9 +1,9 @@
 .App {
   text-align: center;
-  color: azure;
+  color: white;
   background-color: rgb(190, 79, 91);
-  padding: 0.5rem;
-  margin: 1rem;
+  padding: 2rem;
+  margin: 2rem;
 }
 
 .App-logo {
@@ -39,10 +39,15 @@
   margin: auto;
 }
 
+.Navbar {
+  margin-bottom: 2rem;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

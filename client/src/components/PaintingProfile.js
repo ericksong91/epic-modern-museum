@@ -12,31 +12,35 @@ function PaintingProfile({ museums }) {
     const [artist, setArtist] = useState({});
 
     useEffect(() => {
-        museums.length === 0 ? 
-        setPainting({}) 
-        : 
-        setPainting(museumObj.paintings.find((paint) => parseInt(paint.id) === index));
+        museums.length === 0 ?
+            setPainting({})
+            :
+            setPainting(museumObj.paintings.find((paint) => parseInt(paint.id) === index));
 
-        museums.length === 0 ? 
-        setArtist({}) 
-        : 
-        setArtist(museumObj.users.find((user) => (museumObj.paintings.find((paint)=>parseInt(paint.id) === index)).user_id === user.id));
+        museums.length === 0 ?
+            setArtist({})
+            :
+            setArtist(museumObj.users.find((user) => (museumObj.paintings.find((paint) => parseInt(paint.id) === index)).user_id === user.id));
     }, [museums]);
 
     return (
         <div className="PaintingProfile">
             <Container>
                 <Grid container justifyContent={"center"}>
-                    <CardHeader title={painting.name} />
-                    <CardMedia
-                        component="img"
-                        image={painting.img_url}
-                        alt={painting.name}
-                    />
-                    <CardContent>
-                        Created by: {artist.username}
-                        {painting.bio}
-                    </CardContent>
+                    <Card sx={{ minWidth: 600 }}>
+                        <CardHeader
+                            title={painting.name}
+                            subheader={`Painter: ${artist.username}`}
+                        />
+                        <CardMedia
+                            component="img"
+                            image={painting.img_url}
+                            alt={painting.name}
+                        />
+                        <CardContent>
+                            {painting.bio}
+                        </CardContent>
+                    </Card>
                 </Grid>
             </Container>
 

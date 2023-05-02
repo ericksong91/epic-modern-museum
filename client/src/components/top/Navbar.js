@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../context/user";
-import { Button, Container, Card, Grid } from "@mui/material";
+import { Button, Container, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function Navbar() {
