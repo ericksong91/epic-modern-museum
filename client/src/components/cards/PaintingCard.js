@@ -1,5 +1,5 @@
-import Button from '@mui/material/Button';
-import { Card, CardContent, CardHeader, CardMedia } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Button, Card, CardContent, CardHeader, CardMedia } from '@mui/material';
 
 
 function PaintingCard({ paint }) {
@@ -19,7 +19,7 @@ function PaintingCard({ paint }) {
             <CardContent>
                 {bio}
             </CardContent>
-            <Button variant="contained">Learn more</Button>
+            <Link to={`/paintings/${id}`}><Button variant="contained">Learn more</Button></Link>
         </Card>
     );
 }

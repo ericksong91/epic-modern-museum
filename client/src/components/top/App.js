@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Homepage from './Homepage';
-import Museums from '../Museums';
-import MuseumProfile from '../MuseumProfile';
 import LoginForm from './LoginForm';
 import Profile from '../top/Profile';
+import Museums from '../Museums';
+import MuseumProfile from '../MuseumProfile';
+import PaintingProfile from '../PaintingProfile';
 import { Container } from '@mui/material';
 import '../../css/App.css';
 import {
@@ -28,9 +29,10 @@ function App() {
       <Container maxWidth="lg">
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path='/profile' element={<Profile />} />
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} />} />
+          <Route path='/paintings/:id' element={<PaintingProfile museums={museums}/>} /> 
           <Route path='/login' element={<LoginForm />} />
         </Routes>
       </Container>
