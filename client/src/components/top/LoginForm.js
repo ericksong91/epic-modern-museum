@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Button, Container, Box, TextField } from '@mui/material';
 import { UserContext } from '../context/user';
-import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 
 function LoginForm() {
@@ -18,12 +18,7 @@ function LoginForm() {
   }
 
   if (user) {
-    return (
-      <Container className='LoginPage' component="main" maxWidth="xs">
-        <h1>Logged in as {user.username}.</h1>
-        <Link to="/"><Button variant="contained">Return Home</Button></Link>
-      </Container>
-    )
+    return <Navigate replace to="/profile" />;
   }
 
   return (

@@ -3,7 +3,7 @@ import Navbar from './Navbar';
 import Homepage from './Homepage';
 import Museums from '../Museums';
 import MuseumProfile from '../MuseumProfile';
-import LoginForm from '../sessions/LoginForm';
+import LoginForm from './LoginForm';
 import Profile from '../top/Profile';
 import { Container } from '@mui/material';
 import '../../css/App.css';
