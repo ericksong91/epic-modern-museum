@@ -29,8 +29,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path='/museums' element={<Museums museums={museums} />} />
-          <Route path='/museums/:id' element={<MuseumProfile museums={museums} />} />
+          <Route path='/locations' element={<Museums museums={museums} />} />
+          <Route path='/locations/:id' element={<MuseumProfile museums={museums} />} />
           <Route path='/login' element={<LoginForm />} />
         </Routes>
       </Container>

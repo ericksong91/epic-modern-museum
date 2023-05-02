@@ -15,7 +15,7 @@ function Navbar() {
             {<Link to="/"><Button variant="contained">Return Home</Button></Link>}
           </Grid>
           <Grid item>
-            {<Link to="/museums"><Button variant="contained">View Museums</Button></Link>}
+            {<Link to="/locations"><Button variant="contained">View Museums</Button></Link>}
           </Grid>
           <Grid item>
             {!user ? <Link to="/login"><Button variant="contained">Login</Button></Link>

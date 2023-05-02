@@ -14,7 +14,7 @@ function MuseumCard({ museum }) {
                 {bio}
                 {location}
             </CardContent>
-            <Link to={`/museums/${museum.id}`} key={museum.id}><Button variant="contained">Explore!</Button></Link>
+            <Link to={`/locations/${museum.id}`} key={museum.id}><Button variant="contained">Explore!</Button></Link>
         </Card>
     );
 }

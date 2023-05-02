@@ -26,8 +26,8 @@ function Homepage() {
                             image={museumURL}
                             alt={"Explore Museums"}
                         />
-                        {!user ? <Link to={'/museums'}><Button variant="contained">Explore Museums as a Guest</Button></Link> :
-                            <Link to={'/museums'}><Button variant="contained">Explore Museums</Button></Link>}
+                        {!user ? <Link to={'/locations'}><Button variant="contained">Explore Museums as a Guest</Button></Link> :
+                            <Link to={'/locations'}><Button variant="contained">Explore Museums</Button></Link>}
                     </Card>
 
                 </Grid>
