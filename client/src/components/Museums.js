@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 function Museums({ museums }) {
     const museumList = museums.map((museum) => {
         return (
-            <Grid item xs={12} sm={6} md={4}><MuseumCard key={museum.id} museum={museum} /></Grid>
+            <Grid item xs={12} sm={6} md={4} key={museum.id}><MuseumCard museum={museum} /></Grid>
         )
     })
 

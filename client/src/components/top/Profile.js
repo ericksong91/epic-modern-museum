@@ -12,10 +12,10 @@ function Profile() {
     }
 
     const userPaintings = user.paintings.map((paint) => {
-        return <Grid item xs={12} sm={6} md={4}><PaintingCard key={paint.id} paint={paint} /></Grid>
+        return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} /></Grid>
     })
     const userMuseums = user.museums.map((muse) => {
-        return <Grid item xs={12} sm={6} md={4}><MuseumCard key={muse.id} museum={muse} /></Grid>
+        return <Grid item xs={12} sm={6} md={4} key={muse.id}><MuseumCard museum={muse} /></Grid>
     })
 
     console.log(user.paintings)

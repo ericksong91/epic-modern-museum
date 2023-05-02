@@ -16,7 +16,7 @@ function MuseumProfile({ museums }) {
     }, [index, museums, museumObj.paintings])
 
     const paintingsList = paintings.map((paint) => {
-        return <Grid item xs={12} sm={6} md={4}><PaintingCard key={paint.id} paint={paint} /></Grid>
+        return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} /></Grid>
     })
 
     return (
