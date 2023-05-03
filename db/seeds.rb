@@ -26,7 +26,8 @@ end
 pp "Now Seeding Paintings..."
 
 10.times do
-    painting = Painting.create!(name: "Painting of #{Faker::Name.first_name}", bio: "#{Faker::Lorem.paragraphs(number:1)[0]}, #{Faker::Lorem.paragraphs(number:1)[1]}, #{Faker::Lorem.paragraphs(number:1)[3]}", img_url: "#{Faker::LoremFlickr.image}", year: rand(2006..2023),
+    painting = Painting.create!(name: "Painting of #{Faker::Name.first_name}", bio: "#{Faker::Lorem.paragraphs(number:4)[0]}, 
+    #{Faker::Lorem.paragraphs(number:4)[1]}, #{Faker::Lorem.paragraphs(number:4)[2]}, #{Faker::Lorem.paragraphs(number:4)[3]}", img_url: "#{Faker::LoremFlickr.image}", year: rand(2006..2023),
     user_id: rand(User.first.id..User.last.id), museum_id: rand(Museum.first.id..Museum.last.id))
 end
 

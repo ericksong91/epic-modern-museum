@@ -3,18 +3,17 @@ import { Button, Card, CardContent, CardHeader, CardMedia } from '@mui/material'
 
 
 function PaintingCard({ paint, museum }) {
-    const { bio, id, img_url, user_id, name, created_at } = paint;
+    const { bio, id, img_url, user_id, name, year } = paint;
     const artist = museum === undefined ?
         null
         :
         museum.users.find((user) => user.id === user_id);
-    const year = created_at.split(/[-]/);
 
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
                 title={name}
-                subheader={artist === null ? `Uploaded: ${year[0]}` : `Painted by ${artist.username}`}
+                subheader={artist === null ? `Created: ${year}` : `By ${artist.username}, ${year}`}
             />
             <CardMedia
                 component="img"

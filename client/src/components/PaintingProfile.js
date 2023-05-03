@@ -10,7 +10,6 @@ function PaintingProfile({ museums }) {
         museums.find((muse) => muse.paintings.find((paint) => parseInt(paint.id) === index));
     const [painting, setPainting] = useState({});
     const [artist, setArtist] = useState({});
-    const year = painting.created_at.split(/[-]/);
 
     useEffect(() => {
         museums.length === 0 ?
@@ -28,13 +27,10 @@ function PaintingProfile({ museums }) {
         <div className="PaintingProfile">
             <Container>
                 <Grid container justifyContent={"center"}>
-                    <Card sx={{ minWidth: 600 }}>
+                    <Card sx={{ minWidth: 300 }}>
                         <CardHeader
                             title={painting.name}
-                            subheader={`Painter: ${artist.username} `}
-                        />
-                        <CardHeader
-                            subheader={year[0]}
+                            subheader={`Painter: ${artist.username}, ${painting.year}`}
                         />
                         <CardMedia
                             component="img"
