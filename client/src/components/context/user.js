@@ -25,7 +25,7 @@ function UserProvider({ children }) {
     }
 
     function login(username, password, setIsLoading) {
-        setErrors(null);
+        setErrors([]);
         fetch("/login", {
             method: "POST",
             headers: {
@@ -44,7 +44,7 @@ function UserProvider({ children }) {
     }
 
     function signup(username, password, passwordConfirmation, bio, setIsLoading) {
-        setErrors(null);
+        setErrors([]);
         fetch("signup", {
             method: "POST",
             headers: {
