@@ -33,7 +33,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} />} />
-          <Route path='/paintings/:id' element={<PaintingProfile museums={museums}/>} /> 
+          <Route path='/paintings/:id' element={<PaintingProfile museums={museums} />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/signup' element={<SignupForm />} />
         </Routes>

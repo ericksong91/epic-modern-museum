@@ -1,14 +1,17 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { UserContext } from '../context/user'
 import PaintingCard from '../cards/PaintingCard';
 import MuseumCard from '../cards/MuseumCard';
+import NewPaintingForm from '../NewPaintingForm';
+import { Navigate } from 'react-router-dom';
 import { Grid, Container, Button } from '@mui/material';
 
 function Profile() {
+    const [show, setShow] = useState(false);
     const { user } = useContext(UserContext);
 
-    if (user == null) {
-        return <div></div>
+    if (!user) {
+        return <Navigate replace to="/" />;
     };
 
     const userPaintings = user.paintings.map((paint) => {
@@ -21,7 +24,11 @@ function Profile() {
     return (
         <div className="Profile">
             <Container maxWidth="lg">
-                <Button variant="contained">Submit New Painting!</Button>
+                {show ? <NewPaintingForm /> : null}
+                {show ?
+                    <Button variant="contained" onClick={() => setShow(false)}>Hide</Button>
+                    :
+                    <Button variant="contained" onClick={() => setShow(true)}>Submit New Painting!</Button>}
                 <h1>Paintings</h1>
                 <Grid container spacing={4} justifyContent={"center"}>
                     {userPaintings}

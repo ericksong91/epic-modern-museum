@@ -53,7 +53,8 @@ function SignupForm() {
                         fullWidth
                         id="password"
                         name="password"
-                        label="Password"
+                        label="Password (9 - 17 characters)"
+                        inputProps={{ maxLength: 17, minLength: 9 }}
                         type="password"
                         value={password}
                         onChange={(e) => { setPassword(e.target.value) }}
@@ -65,6 +66,7 @@ function SignupForm() {
                         id="password_confirmation"
                         name="password_confirmation"
                         label="Password Confirmation"
+                        inputProps={{ maxLength: 17, minLength: 9 }}
                         type="password"
                         value={passwordConfirmation}
                         onChange={(e) => { setPasswordConfirmation(e.target.value) }}

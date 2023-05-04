@@ -46,6 +46,14 @@
   margin: auto;
 }
 
+.NewPaintingForm {
+  color: black;
+  background-color: white;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.25rem;
+}
+
 .Navbar {
   margin-bottom: 2rem;
 }
