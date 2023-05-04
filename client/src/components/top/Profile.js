@@ -9,16 +9,14 @@ function Profile() {
 
     if (user == null) {
         return <div></div>
-    }
+    };
 
     const userPaintings = user.paintings.map((paint) => {
         return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} /></Grid>
     })
     const userMuseums = user.museums.map((muse) => {
         return <Grid item xs={12} sm={6} md={4} key={muse.id}><MuseumCard museum={muse} /></Grid>
-    })
-
-    console.log(user.paintings)
+    });
 
     return (
         <div className="Profile">

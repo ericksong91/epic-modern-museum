@@ -1,19 +1,26 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/user";
+import { Navigate } from "react-router-dom";
 import { Button, Container, Box, TextField } from '@mui/material';
 
 function SignupForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [bio, setBio] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const { user, login, errors } = useContext(UserContext);
+    const { user, signup, errors } = useContext(UserContext);
 
     function handleSubmit(e) {
         e.preventDefault();
         console.log(e)
+
+        signup(username, password, passwordConfirmation, bio, setIsLoading);
     };
 
+    if (user) {
+        return <Navigate replace to="/profile" />;
+    };
 
     return (
         <Container className='SignupPage' component="main" maxWidth="xs">
@@ -60,6 +67,18 @@ function SignupForm() {
                         type="password"
                         value={passwordConfirmation}
                         onChange={(e) => { setPasswordConfirmation(e.target.value) }}
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        multiline
+                        fullWidth
+                        id="biography"
+                        name="biography"
+                        label={`Biography (${300 - bio.length} char left)`}
+                        inputProps={{ maxLength: 300 }}
+                        value={bio}
+                        onChange={(e) => { setBio(e.target.value) }}
                     />
                     <Button
                         type="submit"
