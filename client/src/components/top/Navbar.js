@@ -25,7 +25,7 @@ function Navbar() {
               <Link to="/locations"><Button variant="contained">View Museums</Button></Link>}
           </Grid>
           <Grid item>
-            {!user ? null
+            {!user ? <Link to="/signup"><Button variant="contained">Signup</Button></Link>
               :
               <Link to="/"><Button variant="contained" onClick={logout}>Logout</Button></Link>}
           </Grid>
