@@ -1,9 +1,7 @@
 import { useContext } from 'react';
 import { UserContext } from '../context/user';
 import { Link } from "react-router-dom"
-import {
-    Button, Grid, Container, Card, CardContent, CardHeader, CardMedia
-} from '@mui/material';
+import { Button, Grid, Card, CardMedia } from '@mui/material';
 import '../../css/App.css';
 
 
@@ -33,7 +31,7 @@ function Homepage() {
                 </Grid>
                 <Grid item>
                     <Card>
-                    <CardMedia
+                        <CardMedia
                             component="img"
                             width="300"
                             height="300"

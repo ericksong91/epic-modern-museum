@@ -3,7 +3,7 @@ import { Button, Card, CardContent, CardHeader } from '@mui/material';
 
 
 function MuseumCard({ museum }) {
-    const { bio, id, location, name } = museum;
+    const { bio, location, name } = museum;
 
     return (
         <Card sx={{ maxWidth: 345, minHeight: 230}}>
