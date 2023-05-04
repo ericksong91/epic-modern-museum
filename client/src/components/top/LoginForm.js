@@ -3,7 +3,6 @@ import { Button, Container, Box, TextField } from '@mui/material';
 import { UserContext } from '../context/user';
 import { Navigate } from 'react-router-dom';
 
-
 function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

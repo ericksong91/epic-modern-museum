@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Homepage from './Homepage';
 import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 import Profile from '../top/Profile';
 import Museums from '../Museums';
 import MuseumProfile from '../MuseumProfile';
@@ -34,6 +35,7 @@ function App() {
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} />} />
           <Route path='/paintings/:id' element={<PaintingProfile museums={museums}/>} /> 
           <Route path='/login' element={<LoginForm />} />
+          <Route path='/signup' element={<SignupForm />} />
         </Routes>
       </Container>
 
