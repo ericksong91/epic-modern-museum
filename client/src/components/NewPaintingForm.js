@@ -12,7 +12,7 @@ function NewPaintingForm({ }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-
+        setIsLoading(true);
     }
 
     return (
