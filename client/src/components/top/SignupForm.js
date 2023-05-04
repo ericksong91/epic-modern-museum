@@ -78,7 +78,7 @@ function SignupForm() {
                         fullWidth
                         id="biography"
                         name="biography"
-                        label={`Biography (${300 - bio.length} char left)`}
+                        label={`Biography (${300 - bio.length} chars left)`}
                         inputProps={{ maxLength: 300 }}
                         value={bio}
                         onChange={(e) => { setBio(e.target.value) }}
