@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { UserContext } from '../context/user'
 import PaintingCard from '../cards/PaintingCard';
 import MuseumCard from '../cards/MuseumCard';
-import { Grid, Container } from '@mui/material';
+import { Grid, Container, Button } from '@mui/material';
 
 function Profile() {
     const { user } = useContext(UserContext);
@@ -21,6 +21,7 @@ function Profile() {
     return (
         <div className="Profile">
             <Container maxWidth="lg">
+                <Button variant="contained">Submit New Painting!</Button>
                 <h1>Paintings</h1>
                 <Grid container spacing={4} justifyContent={"center"}>
                     {userPaintings}
