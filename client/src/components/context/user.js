@@ -53,7 +53,7 @@ function UserProvider({ children }) {
             body: JSON.stringify({
                 username,
                 password,
-                passwordConfirmation,
+                password_confirmation: passwordConfirmation,
                 bio
             })
         })

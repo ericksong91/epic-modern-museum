@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/user";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { Button, Container, Box, TextField } from '@mui/material';
 
 function SignupForm() {
@@ -13,7 +13,7 @@ function SignupForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(e)
+        setIsLoading(true);
 
         signup(username, password, passwordConfirmation, bio, setIsLoading);
     };
@@ -91,6 +91,15 @@ function SignupForm() {
                     {errors}
                 </Box>
             </Box>
+            <Link to="/login">
+                <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                >
+                    Already have an account? Login!
+                </Button>
+            </Link>
         </Container>
     )
 
