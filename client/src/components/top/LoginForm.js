@@ -7,13 +7,14 @@ function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { user, login, errors } = useContext(UserContext);
+  const [errors, setErrors] = useState([]);
+  const { user, login } = useContext(UserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
 
-    login(username, password, setIsLoading);
+    login(username, password, setIsLoading, setErrors);
   }
 
   if (user) {

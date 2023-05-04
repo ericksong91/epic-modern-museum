@@ -7,15 +7,16 @@ function SignupForm() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [errors, setErrors] = useState([]);
     const [bio, setBio] = useState("");
     const [isLoading, setIsLoading] = useState(false);
-    const { user, signup, errors } = useContext(UserContext);
+    const { user, signup } = useContext(UserContext);
 
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
 
-        signup(username, password, passwordConfirmation, bio, setIsLoading);
+        signup(username, password, passwordConfirmation, bio, setIsLoading, setErrors);
     };
 
     if (user) {

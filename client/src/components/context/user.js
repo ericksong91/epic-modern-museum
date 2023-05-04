@@ -4,7 +4,7 @@ const UserContext = React.createContext();
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
-    const [errors, setErrors] = useState([]);
+    // const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         fetch('/me')
@@ -24,7 +24,7 @@ function UserProvider({ children }) {
             })
     }
 
-    function login(username, password, setIsLoading) {
+    function login(username, password, setIsLoading, setErrors) {
         setErrors([]);
         fetch("/login", {
             method: "POST",
@@ -43,7 +43,7 @@ function UserProvider({ children }) {
             });
     }
 
-    function signup(username, password, passwordConfirmation, bio, setIsLoading) {
+    function signup(username, password, passwordConfirmation, bio, setIsLoading, setErrors) {
         setErrors([]);
         fetch("signup", {
             method: "POST",
@@ -69,7 +69,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value={{ user, errors, setUser, logout, login, signup }}>
+        <UserContext.Provider value={{ user, setUser, logout, login, signup }}>
             {children}
         </UserContext.Provider>
     )
