@@ -4,5 +4,5 @@ class Museum < ApplicationRecord
     validates :bio, presence: true
 
     has_many :paintings
-    has_many :users, through: :paintings
+    has_many :users, -> { distinct }, through: :paintings
 end
