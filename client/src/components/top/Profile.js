@@ -13,6 +13,8 @@ function Profile({ museums }) {
         return <div></div>
     }
 
+
+    console.log(user)
     const userPaintings = user.paintings.map((paint) => {
         return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} /></Grid>
     })
@@ -23,7 +25,7 @@ function Profile({ museums }) {
     return (
         <div className="Profile">
             <Container maxWidth="lg">
-                {show ? <NewPaintingForm museums={museums} /> : null}
+                {show ? <NewPaintingForm museums={museums} onShow={setShow} /> : null}
                 {show ?
                     <Button variant="contained" onClick={() => setShow(false)}>Hide</Button>
                     :

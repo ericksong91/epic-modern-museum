@@ -34,7 +34,7 @@ function UserProvider({ children }) {
             body: JSON.stringify({ username, password })
         })
             .then((r) => {
-                setIsLoading(false)
+                setIsLoading(false);
                 if (r.ok) {
                     r.json().then((data) => setUser(data));
                 } else {

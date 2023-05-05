@@ -8,7 +8,7 @@ class PaintingsController < ApplicationController
         if session[:user_id]
             user = User.find(session[:user_id])
             painting = user.paintings.create!(paint_params)
-            render json: painting, status: created
+            render json: painting, status: :created
         else
             render json: {"errors": ["Not authorized"], status: :unauthorized}
         end

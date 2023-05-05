@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import {
-    Button, Grid, Container, Box, TextField, Card, CardMedia, CardHeader, CardContent,
+    Button, Container, Box, TextField, Card, CardMedia, CardHeader, CardContent,
     FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
 
-function NewPaintingForm({ museums }) {
+function NewPaintingForm({ museums, onShow }) {
     const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [image, setImage] = useState("");
@@ -17,15 +17,40 @@ function NewPaintingForm({ museums }) {
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
+        const museumObj = museums.filter((muse) => muse.name === selectMuseum)
 
         const paintObj = {
             name,
             bio,
             img_url: image,
             year,
+            museum_id: museumObj[0].id
         }
 
-        console.log(paintObj)
+        fetch('/paintings', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(paintObj)
+        })
+            .then((r) => {
+                setIsLoading(false);
+                if (r.ok) {
+                    r.json().then((data) => console.log(data))
+                } else {
+                    r.json().then((error) => setErrors(error.errors));
+                }
+            })
+            .then(()=>{
+                onShow(false);
+                setName("");
+                setBio("");
+                setImage("");
+                setYear("");
+                setSelectMuseum("");
+                setErrors([]);
+            })
     }
 
     return (
@@ -96,7 +121,7 @@ function NewPaintingForm({ museums }) {
                                 {museumList}
                             </Select>
                         </FormControl>
-                        <Card fullWidth>
+                        <Card>
                             <CardHeader
                                 title={"Preview"}
                                 subheader={name}

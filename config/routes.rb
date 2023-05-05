@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   #General Resources
-  resources :paintings, only: [:index]
+  resources :paintings, only: [:index, :create]
   resources :museums, only: [:index]
 
   #User Routing, signups, profile, login, logout

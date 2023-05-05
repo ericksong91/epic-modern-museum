@@ -7,5 +7,5 @@ class User < ApplicationRecord
     has_secure_password
     
     has_many :paintings, dependent: :destroy
-    has_many :museums, through: :paintings
+    has_many :museums, -> { distinct }, through: :paintings
 end
