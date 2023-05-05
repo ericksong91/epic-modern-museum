@@ -2,17 +2,26 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Grid, Container, Box, TextField, Card, CardMedia, CardHeader, CardContent } from '@mui/material';
 
-function NewPaintingForm({ }) {
+function NewPaintingForm({ museums }) {
     const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [image, setImage] = useState("");
     const [year, setYear] = useState("");
+    const [selectMuseum, setSelectMuseum] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
 
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
+
+        paintObj = {
+            name,
+            bio,
+            img_url: image,
+            year,
+
+        }
     }
 
     return (

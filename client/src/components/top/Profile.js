@@ -6,7 +6,7 @@ import NewPaintingForm from '../NewPaintingForm';
 import { Navigate } from 'react-router-dom';
 import { Grid, Container, Button } from '@mui/material';
 
-function Profile() {
+function Profile({ museums }) {
     const [show, setShow] = useState(false);
     const { user } = useContext(UserContext);
 
@@ -24,7 +24,7 @@ function Profile() {
     return (
         <div className="Profile">
             <Container maxWidth="lg">
-                {show ? <NewPaintingForm /> : null}
+                {show ? <NewPaintingForm museums={museums} /> : null}
                 {show ?
                     <Button variant="contained" onClick={() => setShow(false)}>Hide</Button>
                     :

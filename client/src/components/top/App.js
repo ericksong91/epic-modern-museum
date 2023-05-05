@@ -30,7 +30,7 @@ function App() {
       <Container maxWidth="lg">
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={<Profile museums={museums} />} />
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} />} />
           <Route path='/paintings/:id' element={<PaintingProfile museums={museums} />} />
