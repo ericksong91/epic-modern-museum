@@ -10,8 +10,6 @@ function Profile({ museums, onNewPainting }) {
     const [paintings, setPaintings] = useState([]);
     const { user } = useContext(UserContext);
 
-    console.log(user)
-
     if (!user) {
         return <div></div>
     }

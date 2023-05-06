@@ -8,14 +8,9 @@ function PaintingProfile({ paintings, users }) {
     const [artist, setArtist] = useState({});
 
     useEffect(() => {
-        setPainting(paintings.filter((paint) => paint.id === index))
-        setArtist(users.filter((user) => user.id === painting[0].user_id))
-
+        paintings.length === 0 ? setPainting({}) : setPainting(paintings.find((paint) => paint.id === index));
+        users.length === 0 ? setArtist({}) : setArtist(users.find((user) => user.id === painting.user_id));
     }, [paintings, users])
-
-
-    console.log(painting, artist)
-    console.log(users)
 
     return (
         <div className="PaintingProfile">
