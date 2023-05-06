@@ -16,13 +16,34 @@ import {
 
 function App() {
   const [museums, setMuseums] = useState([]);
+  const [paintings, setPaintings] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     fetch("/museums")
-      .then((r) => r.json())
-      .then((data) => setMuseums(data))
-      .catch(() => alert("Error!"))
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((data) => {
+            setMuseums(data);
+            const usersList = [];
+            const paintingList = [];
+            data.forEach((museum) => {
+              museum.paintings.forEach((paint) => paintingList.push(paint))
+              museum.users.forEach((user) => usersList.push(user))
+            });
+            paintingList.sort((a, b) => a.id - b.id);
+            usersList.sort((a, b) => a.id - b.id);
+            setPaintings(paintingList);
+            setUsers(usersList);
+          })
+        } else {
+          r.json().then((error) => alert(error))
+        }
+      })
   }, [])
+
+  function handleNewPainting(newPainting) {
+  }
 
   return (
     <div className="App">
@@ -30,10 +51,10 @@ function App() {
       <Container maxWidth="lg">
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path='/profile' element={<Profile museums={museums} />} />
+          <Route path='/profile' element={<Profile museums={museums} onNewPainting={handleNewPainting} />} />
           <Route path='/locations' element={<Museums museums={museums} />} />
-          <Route path='/locations/:id' element={<MuseumProfile museums={museums} />} />
-          <Route path='/paintings/:id' element={<PaintingProfile museums={museums} />} />
+          <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} />} />
+          <Route path='/paintings/:id' element={<PaintingProfile paintings={paintings} users={users} />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/signup' element={<SignupForm />} />
         </Routes>

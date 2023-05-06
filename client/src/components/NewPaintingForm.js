@@ -4,7 +4,7 @@ import {
     FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
 
-function NewPaintingForm({ museums, onShow }) {
+function NewPaintingForm({ museums, onShow, onNewPainting }) {
     const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [image, setImage] = useState("");
@@ -37,19 +37,19 @@ function NewPaintingForm({ museums, onShow }) {
             .then((r) => {
                 setIsLoading(false);
                 if (r.ok) {
-                    r.json().then((data) => console.log(data))
+                    r.json().then((data) => onNewPainting(data))
                 } else {
                     r.json().then((error) => setErrors(error.errors));
                 }
             })
             .then(()=>{
-                onShow(false);
                 setName("");
                 setBio("");
                 setImage("");
                 setYear("");
                 setSelectMuseum("");
                 setErrors([]);
+                onShow(false);
             })
     }
 

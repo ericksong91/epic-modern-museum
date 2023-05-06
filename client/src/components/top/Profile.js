@@ -5,19 +5,21 @@ import MuseumCard from '../cards/MuseumCard';
 import NewPaintingForm from '../NewPaintingForm';
 import { Grid, Container, Button } from '@mui/material';
 
-function Profile({ museums }) {
+function Profile({ museums, onNewPainting }) {
     const [show, setShow] = useState(false);
+    const [paintings, setPaintings] = useState([]);
     const { user } = useContext(UserContext);
+
+    console.log(user)
 
     if (!user) {
         return <div></div>
     }
 
-
-    console.log(user)
     const userPaintings = user.paintings.map((paint) => {
         return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} /></Grid>
-    })
+    });
+
     const userMuseums = user.museums.map((muse) => {
         return <Grid item xs={12} sm={6} md={4} key={muse.id}><MuseumCard museum={muse} /></Grid>
     });
@@ -25,7 +27,7 @@ function Profile({ museums }) {
     return (
         <div className="Profile">
             <Container maxWidth="lg">
-                {show ? <NewPaintingForm museums={museums} onShow={setShow} /> : null}
+                {show ? <NewPaintingForm museums={museums} onShow={setShow} onNewPainting={onNewPainting} /> : null}
                 {show ?
                     <Button variant="contained" onClick={() => setShow(false)}>Hide</Button>
                     :
