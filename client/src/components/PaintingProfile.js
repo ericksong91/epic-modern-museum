@@ -1,16 +1,20 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Grid, Container, Card, CardContent, CardHeader, CardMedia } from '@mui/material';
 
-function PaintingProfile({ paintings, users }) {
+function PaintingProfile({ museums, paintings }) {
     const index = parseInt(useParams().id);
-    const [painting, setPainting] = useState({});
-    const [artist, setArtist] = useState({});
-
-    useEffect(() => {
-        paintings.length === 0 ? setPainting({}) : setPainting(paintings.find((paint) => paint.id === index));
-        users.length === 0 ? setArtist({}) : setArtist(users.find((user) => user.id === painting.user_id));
-    }, [paintings, users])
+    const painting = paintings.find((paint) => paint.id === index) === undefined ?
+        {}
+        :
+        paintings.find((paint) => paint.id === index)
+    const museum = museums.find((muse) => muse.id === painting.museum_id) === undefined ?
+        {}
+        :
+        museums.find((muse) => muse.id === painting.museum_id)
+    const artist = Object.keys(museum).length === 0 ?
+        {}
+        :
+        museum.users.find((user) => user.id === painting.user_id)
 
     return (
         <div className="PaintingProfile">
