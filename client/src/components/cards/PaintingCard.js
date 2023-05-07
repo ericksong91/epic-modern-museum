@@ -25,7 +25,7 @@ function PaintingCard({ paint, museum }) {
                 {bio}
             </CardContent>
             <CardContent>
-                <Link to={`/paintings/${id}`}><Button variant="contained">Learn more</Button></Link>
+                <Link to={`/paintings/${id}`}><Button variant="contained">More</Button></Link>
             </CardContent>
         </Card>
     );
