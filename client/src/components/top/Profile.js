@@ -13,6 +13,7 @@ function Profile({ museums, paintings, onNewPainting }) {
         return <div></div>
     }
 
+    console.log(user)
     const userPaintings = paintings.filter((paint) => paint.user_id === user.id).map((paint) => {
         return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} /></Grid>
     });

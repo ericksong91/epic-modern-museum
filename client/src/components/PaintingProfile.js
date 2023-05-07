@@ -39,7 +39,6 @@ function PaintingProfile({ museums, paintings }) {
                         </CardContent>
                         <Button variant="contained" onClick={()=>navigate(-1)}>Return to Previous Page</Button>
                     </Card>
-
                 </Grid>
             </Container>
 

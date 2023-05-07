@@ -10,7 +10,7 @@ function PaintingCard({ paint, museum }) {
         museum.users.find((user) => user.id === user_id);
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, height: 620 }}>
             <CardHeader
                 title={name}
                 subheader={artist === null ? `Created: ${year}` : `By ${artist.username}, ${year}`}
@@ -24,7 +24,9 @@ function PaintingCard({ paint, museum }) {
             <CardContent>
                 {bio}
             </CardContent>
-            <Link to={`/paintings/${id}`}><Button variant="contained">Learn more</Button></Link>
+            <CardContent>
+                <Link to={`/paintings/${id}`}><Button variant="contained">Learn more</Button></Link>
+            </CardContent>
         </Card>
     );
 }

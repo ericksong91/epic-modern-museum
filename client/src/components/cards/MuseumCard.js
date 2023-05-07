@@ -6,7 +6,7 @@ function MuseumCard({ museum }) {
     const { bio, location, name } = museum;
 
     return (
-        <Card sx={{ maxWidth: 345, minHeight: 230}}>
+        <Card sx={{ maxWidth: 345, height: 230 }}>
             <CardHeader
                 title={name}
             />
@@ -14,7 +14,7 @@ function MuseumCard({ museum }) {
                 {bio}
                 {location}
             </CardContent>
-            <Link to={`/locations/${museum.id}`} key={museum.id}><Button variant="contained">Explore!</Button></Link>
+            <Link to={`/locations/${museum.id}`} key={museum.id}><Button variant="contained" sx={{ margin: 2 }}>Explore!</Button></Link>
         </Card>
     );
 }
