@@ -21,7 +21,7 @@ function PaintingProfile({ museums, paintings }) {
         <div className="PaintingProfile">
             <Container>
                 <Grid container justifyContent={"center"}>
-                    <Card sx={{ minWidth: 600 }}>
+                    <Card sx={{ width: 800 }}>
                         <CardHeader
                             title={painting.name}
                             subheader={`Painter: ${artist.username}, ${painting.year}`}

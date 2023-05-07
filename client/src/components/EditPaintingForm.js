@@ -4,7 +4,7 @@ import {
     FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
 
-function NewPaintingForm({ museums, onShow, onNewPainting }) {
+function EditPaintingForm({ museums, onShow, onNewPainting }) {
     const [name, setName] = useState("");
     const [bio, setBio] = useState("");
     const [image, setImage] = useState("");
@@ -27,19 +27,30 @@ function NewPaintingForm({ museums, onShow, onNewPainting }) {
             museum_id: museumObj[0].id
         }
 
-        onNewPainting(paintObj, setIsLoading, setErrors, cleanUp);
-
-        function cleanUp() {
-            setName("");
-            setBio("");
-            setImage("");
-            setYear("");
-            setSelectMuseum("");
-            setErrors([]);
-            onShow(false);
-        }
-
-
+        fetch('/paintings', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(paintObj)
+        })
+            .then((r) => {
+                setIsLoading(false);
+                if (r.ok) {
+                    r.json().then((data) => onNewPainting(data))
+                } else {
+                    r.json().then((error) => setErrors(error.errors));
+                }
+            })
+            .then(()=>{
+                setName("");
+                setBio("");
+                setImage("");
+                setYear("");
+                setSelectMuseum("");
+                setErrors([]);
+                onShow(false);
+            })
     }
 
     return (
@@ -141,4 +152,4 @@ function NewPaintingForm({ museums, onShow, onNewPainting }) {
     );
 }
 
-export default NewPaintingForm;
+export default EditPaintingForm;

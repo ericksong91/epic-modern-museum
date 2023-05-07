@@ -30,13 +30,30 @@ function App() {
             setPaintings(paintingList);
           })
         } else {
-          r.json().then((error) => alert(error))
+          r.json().then((error) => alert(error.errors))
         }
       })
   }, [])
 
-  function handleNewPainting(newPainting) {
-    setPaintings([...paintings, newPainting])
+  function handleNewPainting(newPainting, setIsLoading, setErrors, cleanUp) {
+    fetch('/paintings', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newPainting)
+    })
+      .then((r) => {
+        setIsLoading(false);
+        if (r.ok) {
+          r.json().then((data) => {
+            setPaintings([...paintings, data]);
+            cleanUp();
+          })
+        } else {
+          r.json().then((error) => setErrors(error.errors));
+        }
+      })
   }
 
   return (

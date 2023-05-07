@@ -15,6 +15,7 @@ function LoginForm() {
     setIsLoading(true);
 
     login(username, password, setIsLoading, setErrors);
+    setPassword("");
   }
 
   if (user) {
