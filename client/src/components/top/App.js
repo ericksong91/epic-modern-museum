@@ -36,6 +36,7 @@ function App() {
   }, [])
 
   function handleNewPainting(newPainting) {
+    setPaintings([...paintings, newPainting])
   }
 
   return (
