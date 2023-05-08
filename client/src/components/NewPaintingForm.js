@@ -53,9 +53,9 @@ function NewPaintingForm({ museums, onShow, onNewPainting }) {
                 >
                     <h1>Submit New Painting</h1>
                     <Box component="form" onSubmit={handleSubmit}>
-                        <Grid container spacing={2} fullWidth justifyContent={"center"}>
-                            <Grid item xs={12} sm={6} md={4} s>
-                                <Card sx={{ maxWidth: 700, height: 600 }} >
+                        <Grid container spacing={2} justifyContent={"center"}>
+                            <Grid item xs={12} sm={6} md={4}>
+                                <Card sx={{ maxWidth: 300, maxheight: 800 }} >
                                     <CardHeader 
                                     title={"Details"}
                                     subheader={name}
@@ -126,7 +126,7 @@ function NewPaintingForm({ museums, onShow, onNewPainting }) {
                                 </Card>
                             </Grid>
                             <Grid item xs={12} sm={6} md={4}>
-                                <Card sx={{ maxWidth: 345, height: 600 }} >
+                                <Card sx={{ maxWidth: 345, maxheight: 600 }} >
                                     <CardHeader
                                         title={"Preview"}
                                         subheader={name}
@@ -134,7 +134,7 @@ function NewPaintingForm({ museums, onShow, onNewPainting }) {
                                     <CardMedia
                                         component="img"
                                         height="400"
-                                        // src={image}
+                                        image={image}
                                         alt={name}
                                     />
                                     <CardContent>
