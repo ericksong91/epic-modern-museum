@@ -14,9 +14,23 @@ class PaintingsController < ApplicationController
         end
     end
 
+    def update
+        if session[:user_id]
+            painting = Painting.find(find_painting)
+            painting.update(paint_params)
+            render json: painting, status: :accepted
+        else
+            render json:  {"errors": ["Not authorized"], status: :unauthorized}
+        end
+    end
+
     private
 
     def paint_params
         params.permit(:name, :bio, :img_url, :year, :museum_id)
+    end
+
+    def find_painting
+        params[:id]
     end
 end
