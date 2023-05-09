@@ -127,7 +127,7 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
                                 {isLoading ? "Loading..." : "Save Changes"}
                             </Button>
                             <Button variant="contained" sx={{ m: 1 }} onClick={() => onReveal(false)}>Cancel</Button>
-                            <Button variant="contained" sx={{ m: 1 }} onClick={() => onDeletePainting(painting.id)}>Delete Painting</Button>
+                            <Button variant="contained" sx={{ m: 1 }} onClick={() => onDeletePainting(painting.id, setErrors)}>Delete Painting</Button>
                         </Card>
                         {errors}
                     </Grid>

@@ -68,14 +68,14 @@ function App() {
         setIsLoading(false);
         if (r.ok) {
           r.json().then((data) => {
-            const filterPaintings = paintings.map((paint) => {
+            const updatedPaintings = paintings.map((paint) => {
               if (paint.id === data.id) {
                 return data
               } else {
                 return paint
               };
             })
-            setPaintings(filterPaintings);
+            setPaintings(updatedPaintings);
             onReveal(false);
           })
         } else {
@@ -84,10 +84,20 @@ function App() {
       })
   }
 
-  function handleDeletePainting(id) {
-
-    console.log(id)
-    // fetch(`/paintings/${id}`)
+  function handleDeletePainting(id, setErrors) {
+    fetch(`/paintings/${id}`, {
+      method: 'DELETE'
+    })
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((data) => {
+            const updatedPainting = paintings.filter((paint) => paint.id !== data.id);
+            setPaintings(updatedPainting);
+          })
+        } else {
+          r.json().then((error) => setErrors(error.errors));
+        }
+      })
   }
 
   return (
