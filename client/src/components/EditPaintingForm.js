@@ -4,7 +4,7 @@ import {
     FormControl, InputLabel, Select, MenuItem, Grid
 } from '@mui/material';
 
-function EditPaintingForm({ painting, museums, museum, onReveal }) {
+function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting }) {
     const [name, setName] = useState(painting.name);
     const [bio, setBio] = useState(painting.bio);
     const [image, setImage] = useState(painting.img_url);
@@ -18,9 +18,8 @@ function EditPaintingForm({ painting, museums, museum, onReveal }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log("You submitted!");
         setIsLoading(true);
-        const museumObj = museums.filter((muse) => muse.name === selectMuseum)
+        const museumObj = museums.filter((muse) => muse.name === selectMuseum);
 
         const paintObj = {
             name,
@@ -28,7 +27,9 @@ function EditPaintingForm({ painting, museums, museum, onReveal }) {
             img_url: image,
             year,
             museum_id: museumObj[0].id
-        }
+        };
+
+        onEditPainting(paintObj, setIsLoading, setErrors, onReveal);
     }
 
     return (
@@ -82,13 +83,14 @@ function EditPaintingForm({ painting, museums, museum, onReveal }) {
                             />
                             <CardMedia
                                 component="img"
+                                height={700}
                                 image={image}
                                 alt={name}
                             />
                             <CardContent>
-                                Currently housed at {selectMuseum} {
+                                Currently housed at {museum.name} {
                                     <FormControl fullWidth required margin="normal">
-                                        <InputLabel>Museum</InputLabel>
+                                        <InputLabel>Change Museum</InputLabel>
                                         <Select
                                             label="Museums"
                                             value={selectMuseum}

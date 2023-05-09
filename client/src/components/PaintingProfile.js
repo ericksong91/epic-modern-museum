@@ -6,7 +6,7 @@ import {
     Grid, Container, Button, Card, CardContent, CardHeader, CardMedia
 } from '@mui/material';
 
-function PaintingProfile({ museums, paintings }) {
+function PaintingProfile({ museums, paintings, onEditPainting }) {
     const index = parseInt(useParams().id);
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
@@ -33,11 +33,6 @@ function PaintingProfile({ museums, paintings }) {
         }
     }, [user, painting.user_id]);
 
-    function handleEdit() {
-        console.log("Editing");
-        setRevealPageEdit(true);
-    }
-
     return (
         <div className="PaintingProfile">
             {revealPageEdit ? (
@@ -46,6 +41,7 @@ function PaintingProfile({ museums, paintings }) {
                     museums={museums}
                     museum={museum}
                     onReveal={setRevealPageEdit}
+                    onEditPainting={onEditPainting}
                 />
             ) : (
                 <Container>
@@ -66,7 +62,10 @@ function PaintingProfile({ museums, paintings }) {
                             <CardContent>
                                 {painting.bio}
                             </CardContent>
-                            {showEdit ? <Button variant="contained" sx={{ m: 1 }} onClick={handleEdit}>Edit</Button> : null}
+                            {showEdit ?
+                                <Button variant="contained" sx={{ m: 1 }} onClick={()=>setRevealPageEdit(true)}>Edit</Button>
+                                :
+                                null}
                             <Button variant="contained" onClick={() => navigate(-1)} sx={{ m: 1 }}>Return to Previous Page</Button>
                         </Card>
                     </Grid>

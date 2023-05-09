@@ -56,16 +56,24 @@ function App() {
       })
   }
 
+  function handleEditPainting(newPainting, setIsLoading, setErrors, cleanUp) {
+    
+  }
+
   return (
     <div className="App">
       <Navbar />
       <Container maxWidth="lg">
         <Routes>
           <Route path='/' element={<Homepage />} />
-          <Route path='/profile' element={<Profile museums={museums} paintings={paintings} onNewPainting={handleNewPainting} />} />
+          <Route path='/profile' element={
+            <Profile museums={museums} paintings={paintings} onNewPainting={handleNewPainting} />
+          } />
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} />} />
-          <Route path='/paintings/:id' element={<PaintingProfile paintings={paintings} museums={museums} />} />
+          <Route path='/paintings/:id' element={
+            <PaintingProfile paintings={paintings} museums={museums} onEditPainting={handleEditPainting} />
+          } />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/signup' element={<SignupForm />} />
         </Routes>

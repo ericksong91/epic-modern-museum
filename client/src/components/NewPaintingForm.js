@@ -38,7 +38,7 @@ function NewPaintingForm({ museums, onShow, onNewPainting }) {
             setSelectMuseum("");
             setErrors([]);
             onShow(false);
-        }
+        };
     }
 
     return (
