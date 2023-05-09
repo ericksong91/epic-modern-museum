@@ -84,16 +84,15 @@ function App() {
       })
   }
 
-  function handleDeletePainting(id, setErrors) {
+  function handleDeletePainting(id, setErrors, navigate) {
     fetch(`/paintings/${id}`, {
       method: 'DELETE'
     })
       .then((r) => {
         if (r.ok) {
-          r.json().then((data) => {
-            const updatedPainting = paintings.filter((paint) => paint.id !== data.id);
+            const updatedPainting = paintings.filter((paint) => paint.id !== id);
             setPaintings(updatedPainting);
-          })
+            navigate(-1);
         } else {
           r.json().then((error) => setErrors(error.errors));
         }

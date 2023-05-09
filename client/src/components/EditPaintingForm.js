@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
     Button, Container, Box, TextField, Card, CardMedia, CardHeader, CardContent,
     FormControl, InputLabel, Select, MenuItem, Grid
 } from '@mui/material';
 
 function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting, onDeletePainting }) {
+    const navigate = useNavigate();
     const [name, setName] = useState(painting.name);
     const [bio, setBio] = useState(painting.bio);
     const [image, setImage] = useState(painting.img_url);
@@ -127,7 +129,7 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
                                 {isLoading ? "Loading..." : "Save Changes"}
                             </Button>
                             <Button variant="contained" sx={{ m: 1 }} onClick={() => onReveal(false)}>Cancel</Button>
-                            <Button variant="contained" sx={{ m: 1 }} onClick={() => onDeletePainting(painting.id, setErrors)}>Delete Painting</Button>
+                            <Button variant="contained" sx={{ m: 1 }} onClick={() => onDeletePainting(painting.id, setErrors, navigate)}>Delete Painting</Button>
                         </Card>
                         {errors}
                     </Grid>
