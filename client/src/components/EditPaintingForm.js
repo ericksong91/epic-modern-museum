@@ -4,18 +4,21 @@ import {
     FormControl, InputLabel, Select, MenuItem, Grid
 } from '@mui/material';
 
-function EditPaintingForm({ museums, onShow, onNewPainting }) {
-    const [name, setName] = useState("");
-    const [bio, setBio] = useState("");
-    const [image, setImage] = useState("");
-    const [year, setYear] = useState("");
-    const [selectMuseum, setSelectMuseum] = useState("");
+function EditPaintingForm({ painting, museums, museum, onReveal }) {
+    const [name, setName] = useState(painting.name);
+    const [bio, setBio] = useState(painting.bio);
+    const [image, setImage] = useState(painting.img_url);
+    const [year, setYear] = useState(painting.year);
     const [isLoading, setIsLoading] = useState(false);
+    const [selectMuseum, setSelectMuseum] = useState(museum.name);
     const [errors, setErrors] = useState([]);
     const museumList = museums.map((muse) => <MenuItem key={muse.id} value={muse.name}>{muse.name}</MenuItem>);
+    const limitNum = 4;
+
 
     function handleSubmit(e) {
         e.preventDefault();
+        console.log("You submitted!");
         setIsLoading(true);
         const museumObj = museums.filter((muse) => muse.name === selectMuseum)
 
@@ -26,18 +29,108 @@ function EditPaintingForm({ museums, onShow, onNewPainting }) {
             year,
             museum_id: museumObj[0].id
         }
-
-        setName("");
-        setBio("");
-        setImage("");
-        setYear("");
-        setSelectMuseum("");
-        setErrors([]);
-        onShow(false);
     }
 
     return (
-        <div className="EditPaintingForm"></div>
+        <div className="EditPaintingForm">
+            <h1>Editing</h1>
+            <Container>
+                <Box component="form" onSubmit={handleSubmit}>
+                    <Grid container justifyContent={"center"}>
+                        <Card sx={{ width: 800 }}>
+                            <CardHeader
+                                title={
+                                    <TextField
+                                        margin="normal"
+                                        required
+                                        id="name"
+                                        label="Painting Name"
+                                        name="name"
+                                        type="text"
+                                        inputProps={{ maxLength: 30 }}
+                                        autoFocus
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                    />
+                                }
+                                subheader={<TextField
+                                    margin="normal"
+                                    required
+                                    id="year"
+                                    name="year"
+                                    label="Year Created (min: 1900)"
+                                    type="number"
+                                    inputProps={{ min: 1900, max: 2023, maxLength: 4 }}
+                                    value={year}
+                                    onChange={(e) => {
+                                        if (e.target.value.toString().length <= limitNum) {
+                                            setYear(e.target.value)
+                                        }
+                                    }}
+                                />
+                                }
+                            />
+                            <TextField
+                                margin="normal"
+                                required
+                                id="painting"
+                                name="painting"
+                                label="Painting URL (must be valid image type)"
+                                type="url"
+                                value={image}
+                                onChange={(e) => setImage(e.target.value)}
+                            />
+                            <CardMedia
+                                component="img"
+                                image={image}
+                                alt={name}
+                            />
+                            <CardContent>
+                                Currently housed at {selectMuseum} {
+                                    <FormControl fullWidth required margin="normal">
+                                        <InputLabel>Museum</InputLabel>
+                                        <Select
+                                            label="Museums"
+                                            value={selectMuseum}
+                                            id="Museums"
+                                            onChange={(e) => setSelectMuseum(e.target.value)}
+                                        >
+                                            {museumList}
+                                        </Select>
+                                    </FormControl>
+                                }
+                            </CardContent>
+                            <CardContent>
+                                <TextField
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    multiline={true}
+                                    minRows={4}
+                                    id="bio"
+                                    name="bio"
+                                    type="text"
+                                    inputProps={{ maxLength: 150 }}
+                                    label={`Description (${150 - bio.length} chars left)`}
+                                    value={bio}
+                                    onChange={(e) => setBio(e.target.value)}
+                                />
+                            </CardContent>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                sx={{ m: 1 }}
+                            >
+                                {isLoading ? "Loading..." : "Save Changes"}
+                            </Button>
+                            <Button variant="contained" sx={{ m: 1 }} onClick={() => onReveal(false)}>Cancel</Button>
+                            <Button variant="contained" sx={{ m: 1 }}>Delete Painting</Button>
+                        </Card>
+                        {errors}
+                    </Grid>
+                </Box>
+            </Container>
+        </div>
     );
 }
 
