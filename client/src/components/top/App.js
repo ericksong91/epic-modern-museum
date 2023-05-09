@@ -28,7 +28,6 @@ function App() {
             paintingList.sort((a, b) => a.id - b.id);
             setMuseums(data);
             setPaintings(paintingList);
-            console.log(data)
           })
         } else {
           r.json().then((error) => alert(error.errors))

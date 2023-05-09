@@ -134,6 +134,7 @@ function NewPaintingForm({ museums, onShow, onNewPainting }) {
                                     <CardMedia
                                         component="img"
                                         height="400"
+                                        width="400"
                                         image={image}
                                         alt={name}
                                     />
