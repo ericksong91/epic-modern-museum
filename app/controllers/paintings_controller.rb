@@ -24,6 +24,12 @@ class PaintingsController < ApplicationController
         end
     end
 
+    def destroy
+        painting = Painting.find(paint_params)
+        painting.destroy
+        head :no_content
+    end
+
     private
 
     def paint_params
