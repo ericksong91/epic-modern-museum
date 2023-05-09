@@ -56,8 +56,38 @@ function App() {
       })
   }
 
-  function handleEditPainting(newPainting, setIsLoading, setErrors, cleanUp) {
-    
+  function handleEditPainting(newPainting, setIsLoading, setErrors, onReveal) {
+    fetch(`/paintings/${newPainting.id}`, {
+      method: "PATCH",
+      headers: {
+        'Content-Type': "application/json"
+      },
+      body: JSON.stringify(newPainting)
+    })
+      .then((r) => {
+        setIsLoading(false);
+        if (r.ok) {
+          r.json().then((data) => {
+            const filterPaintings = paintings.map((paint) => {
+              if (paint.id === data.id) {
+                return data
+              } else {
+                return paint
+              };
+            })
+            setPaintings(filterPaintings);
+            onReveal(false);
+          })
+        } else {
+          r.json().then((error) => setErrors(error.errors));
+        }
+      })
+  }
+
+  function handleDeletePainting(id) {
+
+    console.log(id)
+    // fetch(`/paintings/${id}`)
   }
 
   return (
@@ -72,7 +102,8 @@ function App() {
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} />} />
           <Route path='/paintings/:id' element={
-            <PaintingProfile paintings={paintings} museums={museums} onEditPainting={handleEditPainting} />
+            <PaintingProfile paintings={paintings} museums={museums}
+              onEditPainting={handleEditPainting} onDeletePainting={handleDeletePainting} />
           } />
           <Route path='/login' element={<LoginForm />} />
           <Route path='/signup' element={<SignupForm />} />

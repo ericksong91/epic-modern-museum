@@ -4,7 +4,7 @@ import {
     FormControl, InputLabel, Select, MenuItem, Grid
 } from '@mui/material';
 
-function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting }) {
+function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting, onDeletePainting }) {
     const [name, setName] = useState(painting.name);
     const [bio, setBio] = useState(painting.bio);
     const [image, setImage] = useState(painting.img_url);
@@ -22,6 +22,7 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting 
         const museumObj = museums.filter((muse) => muse.name === selectMuseum);
 
         const paintObj = {
+            id: painting.id,
             name,
             bio,
             img_url: image,
@@ -126,7 +127,7 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting 
                                 {isLoading ? "Loading..." : "Save Changes"}
                             </Button>
                             <Button variant="contained" sx={{ m: 1 }} onClick={() => onReveal(false)}>Cancel</Button>
-                            <Button variant="contained" sx={{ m: 1 }}>Delete Painting</Button>
+                            <Button variant="contained" sx={{ m: 1 }} onClick={() => onDeletePainting(painting.id)}>Delete Painting</Button>
                         </Card>
                         {errors}
                     </Grid>
