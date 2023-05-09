@@ -74,7 +74,7 @@ function App() {
               } else {
                 return paint
               };
-            })
+            });
             setPaintings(updatedPaintings);
             onReveal(false);
           })
