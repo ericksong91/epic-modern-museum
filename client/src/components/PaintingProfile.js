@@ -6,7 +6,7 @@ import {
     Grid, Container, Button, Card, CardContent, CardHeader, CardMedia
 } from '@mui/material';
 
-function PaintingProfile({ museums, paintings, onEditPainting, onDeletePainting }) {
+function PaintingProfile({ museums, paintings, artists, onEditPainting, onDeletePainting }) {
     const index = parseInt(useParams().id);
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
@@ -20,10 +20,14 @@ function PaintingProfile({ museums, paintings, onEditPainting, onDeletePainting 
         {}
         :
         museums.find((muse) => muse.id === painting.museum_id);
-    const artist = Object.keys(museum).length === 0 ?
-        {}
+    // const artist = Object.keys(museum).length === 0 ?
+    //     {}
+    //     :
+    //     museum.users.find((user) => user.id === painting.user_id);
+    const artist = artists.length === 0 ?
+        null
         :
-        museum.users.find((user) => user.id === painting.user_id);
+        artists.find((artist) => artist.id === painting.user_id)
 
     useEffect(() => {
         if (user) {

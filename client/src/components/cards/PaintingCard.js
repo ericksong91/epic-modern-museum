@@ -2,18 +2,26 @@ import { Link } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader, CardMedia } from '@mui/material';
 
 
-function PaintingCard({ paint, museum }) {
+function PaintingCard({ paint, museum, artists }) {
     const { bio, id, img_url, user_id, name, year } = paint;
-    const artist = museum === undefined ?
+    // const artist = museum === undefined ?
+    //     null
+    //     :
+    //     museum.users.find((user) => user.id === user_id);
+    const artist = artists.length === 0 ?
         null
         :
-        museum.users.find((user) => user.id === user_id);
+        artists.find((artist) => artist.id === user_id);
+
+    if (artist === null) {
+        return <div>Loading...</div>
+    }
 
     return (
         <Card sx={{ maxWidth: 345 }}>
             <CardHeader
                 title={name}
-                subheader={artist === null ? `Created: ${year}` : `By ${artist.username}, ${year}`}
+                subheader={`By ${artist.username}, ${year}`}
             />
             <CardMedia
                 component="img"

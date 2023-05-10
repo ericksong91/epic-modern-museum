@@ -4,7 +4,6 @@ const UserContext = React.createContext();
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
-    // const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         fetch('/me')
