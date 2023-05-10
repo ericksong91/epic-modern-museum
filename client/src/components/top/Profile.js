@@ -5,16 +5,16 @@ import MuseumCard from '../cards/MuseumCard';
 import NewPaintingForm from '../NewPaintingForm';
 import { Grid, Container, Button } from '@mui/material';
 
-function Profile({ museums, paintings, onNewPainting }) {
+function Profile({ museums, paintings, artists, onNewPainting }) {
     const [show, setShow] = useState(false);
     const { user } = useContext(UserContext);
 
     if (!user) {
         return <div></div>
-    }
+    } //Change this to a Navigate later
 
     const userPaintings = paintings.filter((paint) => paint.user_id === user.id).map((paint) => {
-        return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} /></Grid>
+        return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} artists={artists} /></Grid>
     });
 
     const userMuseums = user.museums.map((muse) => {

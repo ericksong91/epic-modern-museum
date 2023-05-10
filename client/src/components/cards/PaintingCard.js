@@ -2,12 +2,8 @@ import { Link } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader, CardMedia } from '@mui/material';
 
 
-function PaintingCard({ paint, museum, artists }) {
+function PaintingCard({ paint, artists}) {
     const { bio, id, img_url, user_id, name, year } = paint;
-    // const artist = museum === undefined ?
-    //     null
-    //     :
-    //     museum.users.find((user) => user.id === user_id);
     const artist = artists.length === 0 ?
         null
         :

@@ -21,8 +21,6 @@ function App() {
   const [artists, setArtists] = useState([]);
   const { user } = useContext(UserContext);
 
-  console.log(artists)
-
   useEffect(() => {
     fetch("/museums")
       .then((r) => {
@@ -122,7 +120,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/profile' element={
-            <Profile museums={museums} paintings={paintings} onNewPainting={handleNewPainting} />
+            <Profile museums={museums} paintings={paintings} artists={artists} onNewPainting={handleNewPainting} />
           } />
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} artists={artists} />} />
