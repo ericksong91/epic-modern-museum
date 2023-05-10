@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
     Button, Container, Box, TextField, Card, CardMedia, CardHeader, CardContent, Grid
 } from '@mui/material';
-// import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 
 function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting, onDeletePainting }) {
     const navigate = useNavigate();
@@ -14,23 +14,14 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
     const limitNum = 4;
-    // const [selectMuseum, setSelectMuseum] = useState(museum.name);
-    // const museumList = museums.map((muse) => <MenuItem key={muse.id} value={muse.name}>{muse.name}</MenuItem>);
+    const [selectMuseum, setSelectMuseum] = useState(museum.name);
+    const museumList = museums.map((muse) => <MenuItem key={muse.id} value={muse.name}>{muse.name}</MenuItem>);
 
 
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
-        // const museumObj = museums.filter((muse) => muse.name === selectMuseum);
-
-        // const paintObj = {
-        //     id: painting.id,
-        //     name,
-        //     bio,
-        //     img_url: image,
-        //     year,
-        //     museum_id: museumObj[0].id
-        // };
+        const museumObj = museums.filter((muse) => muse.name === selectMuseum);
 
         const paintObj = {
             id: painting.id,
@@ -38,8 +29,17 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
             bio,
             img_url: image,
             year,
-            museum_id: painting.museum_id
+            museum_id: museumObj[0].id
         };
+
+        // const paintObj = {
+        //     id: painting.id,
+        //     name,
+        //     bio,
+        //     img_url: image,
+        //     year,
+        //     museum_id: painting.museum_id
+        // };
 
         onEditPainting(paintObj, setIsLoading, setErrors, onReveal);
     }
@@ -101,17 +101,17 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
                             />
                             <CardContent>
                                 Currently Housed at {museum.name} {
-                                    // <FormControl fullWidth required margin="normal">
-                                    //     <InputLabel>Change Museum</InputLabel>
-                                    //     <Select
-                                    //         label="Museums"
-                                    //         value={selectMuseum}
-                                    //         id="Museums"
-                                    //         onChange={(e) => setSelectMuseum(e.target.value)}
-                                    //     >
-                                    //         {museumList}
-                                    //     </Select>
-                                    // </FormControl>
+                                    <FormControl fullWidth required margin="normal">
+                                        <InputLabel>Change Museum</InputLabel>
+                                        <Select
+                                            label="Museums"
+                                            value={selectMuseum}
+                                            id="Museums"
+                                            onChange={(e) => setSelectMuseum(e.target.value)}
+                                        >
+                                            {museumList}
+                                        </Select>
+                                    </FormControl>
                                 }
                             </CardContent>
                             <CardContent>

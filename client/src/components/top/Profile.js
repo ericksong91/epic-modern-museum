@@ -3,6 +3,7 @@ import { UserContext } from '../context/user'
 import PaintingCard from '../cards/PaintingCard';
 import MuseumCard from '../cards/MuseumCard';
 import NewPaintingForm from '../NewPaintingForm';
+import { Navigate } from 'react-router-dom';
 import { Grid, Container, Button } from '@mui/material';
 
 function Profile({ museums, paintings, artists, onNewPainting }) {
@@ -10,8 +11,8 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
     const { user } = useContext(UserContext);
 
     if (!user) {
-        return <div></div>
-    } //Change this to a Navigate later
+        return <Navigate replace to="/" />;
+    }
 
     const userPaintings = paintings.filter((paint) => paint.user_id === user.id).map((paint) => {
         return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} artists={artists} /></Grid>

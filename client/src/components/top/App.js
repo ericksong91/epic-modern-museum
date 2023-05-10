@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../context/user';
+import { useState, useEffect } from 'react';
 import Navbar from './Navbar';
 import Homepage from './Homepage';
 import LoginForm from './LoginForm';
@@ -19,7 +18,6 @@ function App() {
   const [museums, setMuseums] = useState([]);
   const [paintings, setPaintings] = useState([]);
   const [artists, setArtists] = useState([]);
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
     fetch("/museums")
@@ -61,6 +59,21 @@ function App() {
         setIsLoading(false);
         if (r.ok) {
           r.json().then((data) => {
+            const museum = museums.find((muse) => muse.id === data.museum_id);
+            const filteredMuseums = museums.map((muse) => {
+              if (muse.id === data.museum_id) {
+                return {
+                  id: museum.id,
+                  bio: museum.bio,
+                  location: museum.location,
+                  name: museum.name,
+                  paintings: [...museum.paintings, data]
+                }
+              } else {
+                return muse
+              }
+            });
+            setMuseums(filteredMuseums);
             setPaintings([...paintings, data]);
             cleanUp();
           })
@@ -89,6 +102,21 @@ function App() {
                 return paint
               };
             });
+            const museum = museums.find((muse) => muse.id === data.museum_id);
+            const filteredMuseums = museums.map((muse) => {
+              if (muse.id === data.museum_id) {
+                return {
+                  id: museum.id,
+                  bio: museum.bio,
+                  location: museum.location,
+                  name: museum.name,
+                  paintings: [...museum.paintings, data]
+                }
+              } else {
+                return muse
+              }
+            });
+            setMuseums(filteredMuseums);
             setPaintings(updatedPaintings);
             onReveal(false);
           })
