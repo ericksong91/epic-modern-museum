@@ -5,6 +5,8 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
 
+    console.log(user)
+
     useEffect(() => {
         fetch('/me')
             .then(res => {
@@ -64,7 +66,6 @@ function UserProvider({ children }) {
                     r.json().then((error) => setErrors(error.errors))
                 }
             })
-
     }
 
     return (

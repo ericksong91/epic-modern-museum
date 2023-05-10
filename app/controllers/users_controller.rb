@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     def show
         user = User.find_by(id: session[:user_id])
         if user
-            render json: user, status: :created
+            render json: user, status: :created, serializer: UserProfileSerializer
         else
             render json: { errors: "No user found" }, status: :unauthorized
         end

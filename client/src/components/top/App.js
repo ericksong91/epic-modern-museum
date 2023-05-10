@@ -21,18 +21,7 @@ function App() {
   const [artists, setArtists] = useState([]);
   const { user } = useContext(UserContext);
 
-  //Museums is structured as: 
-  // const testObj = {
-  //   name: "muse",
-  //   bio: "asdf",
-  //   paintings: ["help", "test"],
-  //   users: ["helpme1", "helpme2"]
-  // }
-  //I need to send the object to the write museum then update the museum Obj
-  //Then I need to send a user object to the users array IF the user doesn't exist
-  //User Object can be obtained from a users list and state that is also updated
-  //Painting object can be obtained from the response
-  //
+  console.log(artists)
 
   useEffect(() => {
     fetch("/museums")
@@ -55,18 +44,12 @@ function App() {
     fetch("/users")
       .then((r) => {
         if (r.ok) {
-          r.json().then((data) => {
-            setArtists(data);
-          })
+          r.json().then((data) => setArtists(data))
         } else {
           r.json().then((error) => alert(error.errors))
         }
       })
   }, [])
-
-  console.log(artists)
-  console.log(museums)
-  console.log(paintings)
 
   function handleNewPainting(newPainting, setIsLoading, setErrors, cleanUp) {
     fetch('/paintings', {

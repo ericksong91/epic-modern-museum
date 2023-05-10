@@ -37,6 +37,10 @@ function PaintingProfile({ museums, paintings, artists, onEditPainting, onDelete
         }
     }, [user, painting.user_id]);
 
+    if (artist === null) {
+        return <div>Loading...</div>
+    }
+
     return (
         <div className="PaintingProfile">
             {revealPageEdit ? (
