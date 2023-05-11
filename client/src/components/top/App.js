@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-// import { useContext } from 'react';
-// import { UserContext } from '../context/user';
+import { useContext } from 'react';
+import { UserContext } from '../context/user';
 import Navbar from './Navbar';
 import Homepage from './Homepage';
 import LoginForm from './LoginForm';
@@ -19,8 +19,7 @@ import {
 function App() {
   const [museums, setMuseums] = useState([]);
   const [paintings, setPaintings] = useState([]);
-  const [artists, setArtists] = useState([]);
-  // const { artists } = useContext(UserContext);
+  const { artists } = useContext(UserContext);
 
   useEffect(() => {
     fetch("/museums")
@@ -33,17 +32,6 @@ function App() {
             setMuseums(data);
             setPaintings(paintingList);
           })
-        } else {
-          r.json().then((error) => alert(error.errors))
-        }
-      })
-  }, [])
-
-  useEffect(() => {
-    fetch("/users")
-      .then((r) => {
-        if (r.ok) {
-          r.json().then((data) => setArtists(data))
         } else {
           r.json().then((error) => alert(error.errors))
         }
@@ -129,6 +117,7 @@ function App() {
       })
   }
 
+  //Fix Delete painting to update museums obj too
   function handleDeletePainting(id, setErrors, navigate) {
     fetch(`/paintings/${id}`, {
       method: 'DELETE'
@@ -151,7 +140,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/profile' element={
-            <Profile museums={museums} paintings={paintings} artists={artists} onNewPainting={handleNewPainting} />
+            <Profile museums={museums} paintings={paintings} artists={artists}
+              onNewPainting={handleNewPainting} />
           } />
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} artists={artists} />} />

@@ -15,6 +15,17 @@ function UserProvider({ children }) {
             })
     }, [])
 
+    useEffect(() => {
+        fetch("/users")
+            .then((r) => {
+                if (r.ok) {
+                    r.json().then((data) => setArtists(data))
+                } else {
+                    r.json().then((error) => alert(error.errors))
+                }
+            })
+    }, [])
+
     function logout() {
         fetch("/logout", { method: "DELETE" })
             .then((r) => {
@@ -62,7 +73,7 @@ function UserProvider({ children }) {
                 if (r.ok) {
                     r.json().then((data) => {
                         setUser(data)
-                        setArtists([...artists, data])  
+                        setArtists([...artists, data])
                     });
                 } else {
                     r.json().then((error) => setErrors(error.errors))
@@ -71,7 +82,7 @@ function UserProvider({ children }) {
     }
 
     return (
-        <UserContext.Provider value={{ user, setUser, logout, login, signup }}>
+        <UserContext.Provider value={{ user, artists, setUser, logout, login, signup }}>
             {children}
         </UserContext.Provider>
     )
