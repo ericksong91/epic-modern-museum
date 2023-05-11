@@ -12,7 +12,7 @@ function MuseumProfile({ museums, paintings, artists }) {
     const paintingsList = paintings.filter((paint) => paint.museum_id === index)
 
     const paintingCards = paintingsList.map((paint) => {
-        return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} museum={museum} artists={artists} /></Grid>
+        return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} artists={artists} /></Grid>
     })
 
     return (

@@ -117,28 +117,12 @@ function App() {
       })
   }
 
-  //Fix Delete painting to update museums obj too
-  function handleDeletePainting(id, museum_id, setErrors, navigate) {
+  function handleDeletePainting(id, setErrors, navigate) {
     fetch(`/paintings/${id}`, {
       method: 'DELETE'
     })
       .then((r) => {
         if (r.ok) {
-          const museum = museums.find((muse) => muse.id === museum_id);
-          // const filterPaintings = museum.paintings.filter((paint) => paint.id !== id)
-            const filteredMuseums = museums.map((muse) => {
-              if (muse.id === museum_id) {
-                return {
-                  id: museum.id,
-                  bio: museum.bio,
-                  location: museum.location,
-                  name: museum.name,
-                  paintings: museum.paintings.filter((paint) => paint.id !== id)
-                }
-              } else {
-                return muse
-              }
-            });
           const updatedPaintings = paintings.filter((paint) => paint.id !== id);
           setPaintings(updatedPaintings);
           navigate(-1);
