@@ -32,15 +32,6 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
             museum_id: museumObj[0].id
         };
 
-        // const paintObj = {
-        //     id: painting.id,
-        //     name,
-        //     bio,
-        //     img_url: image,
-        //     year,
-        //     museum_id: painting.museum_id
-        // };
-
         onEditPainting(paintObj, setIsLoading, setErrors, onReveal);
     }
 
@@ -138,7 +129,7 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
                                 {isLoading ? "Loading..." : "Save Changes"}
                             </Button>
                             <Button variant="contained" sx={{ m: 1 }} onClick={() => onReveal(false)}>Cancel</Button>
-                            <Button variant="contained" sx={{ m: 1 }} onClick={() => onDeletePainting(painting.id, setErrors, navigate)}>Delete Painting</Button>
+                            <Button variant="contained" sx={{ m: 1 }} onClick={() => onDeletePainting(painting.id, painting.museum_id, setErrors, navigate)}>Delete Painting</Button>
                         </Card>
                         {errors}
                     </Grid>

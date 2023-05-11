@@ -72,14 +72,16 @@ function UserProvider({ children }) {
                 setIsLoading(false);
                 if (r.ok) {
                     r.json().then((data) => {
-                        setUser(data)
-                        setArtists([...artists, data])
+                        setUser(data);
+                        setArtists([...artists, data]);
                     });
                 } else {
-                    r.json().then((error) => setErrors(error.errors))
+                    r.json().then((error) => setErrors(error.errors));
                 }
             })
-    }
+    };
+
+    //Add Delete ACcount
 
     return (
         <UserContext.Provider value={{ user, artists, setUser, logout, login, signup }}>
