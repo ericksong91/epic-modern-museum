@@ -67,7 +67,7 @@ function App() {
 
             const updatedUserMuse = [...user.museums];
 
-            if (!user.museums.filter((muse)=> muse.id === museum.id)){
+            if (!user.museums.filter((muse) => muse.id === museum.id)) {
               updatedUserMuse.push(museum)
             }
 
@@ -125,12 +125,11 @@ function App() {
             });
 
             const updatedUserMuse = [];
-
-            const findNumMuseum = user.paintings.filter((paint)=> paint.museum_id === oldMuseum.id).length
+            const findNumMuseum = user.paintings.filter((paint) => paint.museum_id === oldMuseum.id).length
 
             if (findNumMuseum <= 1) {
-              user.museums.forEach((muse)=> {
-                if(muse.id !== oldMuseum.id){
+              user.museums.forEach((muse) => {
+                if (muse.id !== oldMuseum.id) {
                   return updatedUserMuse.push(muse)
                 } else if (muse.id !== museum.id) {
                   return updatedUserMuse.push(museum)
@@ -157,13 +156,51 @@ function App() {
       })
   }
 
-  function handleDeletePainting(id, setErrors, navigate) {
-    fetch(`/paintings/${id}`, {
+  function handleDeletePainting(painting, setErrors, navigate) {
+    fetch(`/paintings/${painting.id}`, {
       method: 'DELETE'
     })
       .then((r) => {
         if (r.ok) {
-          const updatedPaintings = paintings.filter((paint) => paint.id !== id);
+          const museum = museums.find((muse) => muse.id === painting.museum_id);
+          const updatedPaintings = paintings.filter((paint) => paint.id !== painting.id);
+          const updatedPaintingsUser = user.paintings.filter((paint) => paint.id !== painting.id)
+          const updatedPaintingsMuseum = museum.paintings.filter((paint) => paint.id !== painting.id)
+          const filteredMuseums = museums.map((muse) => {
+            if (muse.id === painting.museum_id) {
+              return {
+                id: museum.id,
+                bio: museum.bio,
+                location: museum.location,
+                name: museum.name,
+                paintings: [updatedPaintingsMuseum]
+              }
+            } else {
+              return muse
+            }
+          });
+
+          const updatedUserMuse = [];
+          const findNumMuseum = user.paintings.filter((paint) => paint.museum_id === museum.id).length
+
+          if (findNumMuseum <= 1) {
+            user.museums.forEach((muse) => {
+              if (muse.id !== museum.id) {
+                return updatedUserMuse.push(muse)
+              }
+            })
+          }
+
+          const userObj = {
+            bio: user.bio,
+            id: user.id,
+            museums: updatedUserMuse,
+            paintings: updatedPaintingsUser,
+            username: user.username
+          }
+
+          setUser(userObj);
+          setMuseums(filteredMuseums);
           setPaintings(updatedPaintings);
           navigate(-1);
         } else {
