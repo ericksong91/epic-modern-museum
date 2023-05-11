@@ -4,6 +4,7 @@ const UserContext = React.createContext();
 
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [artists, setArtists] = useState([]);
 
     useEffect(() => {
         fetch('/me')
@@ -59,7 +60,10 @@ function UserProvider({ children }) {
             .then((r) => {
                 setIsLoading(false);
                 if (r.ok) {
-                    r.json().then((data) => setUser(data));
+                    r.json().then((data) => {
+                        setUser(data)
+                        setArtists([...artists, data])  
+                    });
                 } else {
                     r.json().then((error) => setErrors(error.errors))
                 }

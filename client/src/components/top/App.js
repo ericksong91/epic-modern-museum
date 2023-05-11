@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+// import { useContext } from 'react';
+// import { UserContext } from '../context/user';
 import Navbar from './Navbar';
 import Homepage from './Homepage';
 import LoginForm from './LoginForm';
@@ -18,6 +20,7 @@ function App() {
   const [museums, setMuseums] = useState([]);
   const [paintings, setPaintings] = useState([]);
   const [artists, setArtists] = useState([]);
+  // const { artists } = useContext(UserContext);
 
   useEffect(() => {
     fetch("/museums")

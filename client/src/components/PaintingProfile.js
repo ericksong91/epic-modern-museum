@@ -16,18 +16,14 @@ function PaintingProfile({ museums, paintings, artists, onEditPainting, onDelete
         {}
         :
         paintings.find((paint) => paint.id === index);
-    const museum = museums.find((muse) => muse.id === painting.museum_id) === undefined ?
+    const museum = museums.find((muse) => muse.id === painting.museum_id) === undefined || paintings.length === 0 ?
         {}
         :
         museums.find((muse) => muse.id === painting.museum_id);
-    // const artist = Object.keys(museum).length === 0 ?
-    //     {}
-    //     :
-    //     museum.users.find((user) => user.id === painting.user_id);
-    const artist = artists.length === 0 ?
-        null
+    const artist = (paintings.length === 0 || artists.length === 0) ?
+        {}
         :
-        artists.find((artist) => artist.id === painting.user_id)
+        artists.find((artist) => artist.id === painting.user_id) 
 
     useEffect(() => {
         if (user) {
@@ -37,7 +33,7 @@ function PaintingProfile({ museums, paintings, artists, onEditPainting, onDelete
         }
     }, [user, painting.user_id]);
 
-    if (artist === null) {
+    if (paintings.length === 0 || artists.length === 0 || museums.length === 0) {
         return <div>Loading...</div>
     }
 
