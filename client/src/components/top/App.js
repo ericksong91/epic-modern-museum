@@ -19,7 +19,7 @@ import {
 function App() {
   const [museums, setMuseums] = useState([]);
   const [paintings, setPaintings] = useState([]);
-  const { artists } = useContext(UserContext);
+  const { user, setUser, artists } = useContext(UserContext);
 
   useEffect(() => {
     fetch("/museums")
@@ -64,6 +64,22 @@ function App() {
                 return muse
               }
             });
+
+            const updatedUserMuse = [...user.museums];
+
+            if (!user.museums.filter((muse)=> muse.id === museum.id)){
+              updatedUserMuse.push(museum)
+            }
+
+            const userObj = {
+              bio: user.bio,
+              id: user.id,
+              museums: updatedUserMuse,
+              paintings: [...user.paintings, data],
+              username: user.username
+            }
+
+            setUser(userObj);
             setMuseums(filteredMuseums);
             setPaintings([...paintings, data]);
             cleanUp();
@@ -107,6 +123,25 @@ function App() {
                 return muse
               }
             });
+
+            const updatedUserMuse = [...user.museums];
+
+            if (!user.museums.filter((muse)=> muse.id === museum.id)){
+              debugger
+              updatedUserMuse.push(museum)
+            }
+
+            console.log(updatedUserMuse)
+
+            const userObj = {
+              bio: user.bio,
+              id: user.id,
+              museums: updatedUserMuse,
+              paintings: [...user.paintings, data],
+              username: user.username
+            }
+
+            setUser(userObj);
             setMuseums(filteredMuseums);
             setPaintings(updatedPaintings);
             onReveal(false);

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button, Card, CardContent, CardHeader, CardMedia } from '@mui/material';
 
 
-function PaintingCard({ paint, artists}) {
+function PaintingCard({ paint, artists }) {
     const { bio, id, img_url, user_id, name, year } = paint;
     const artist = artists.length === 0 ?
         null

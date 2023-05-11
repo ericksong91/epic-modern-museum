@@ -22,6 +22,7 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
         return <Grid item xs={12} sm={6} md={4} key={muse.id}><MuseumCard museum={muse} /></Grid>
     });
 
+
     return (
         <div className="Profile">
             <Container maxWidth="lg">
@@ -30,6 +31,8 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
                     <Button variant="contained" onClick={() => setShow(false)}>Hide</Button>
                     :
                     <Button variant="contained" onClick={() => setShow(true)}>Submit New Painting!</Button>}
+                <h1>Biography</h1>
+                <h2>{user.bio}</h2>
                 <h1>Paintings</h1>
                 <Grid container spacing={4} justifyContent={"center"}>
                     {userPaintings}
