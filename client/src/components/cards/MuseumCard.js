@@ -6,7 +6,7 @@ function MuseumCard({ museum }) {
     const { bio, location, name } = museum;
 
     return (
-        <Card sx={{ maxWidth: 345, height: 230 }}>
+        <Card sx={{ maxWidth: 345, maxheight: 300 }}>
             <CardHeader
                 title={name}
             />

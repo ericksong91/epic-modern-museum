@@ -90,7 +90,7 @@ function App() {
       })
   }
 
-  function handleEditPainting(newPainting, setIsLoading, setErrors, onReveal) {
+  function handleEditPainting(newPainting, oldMuseum, setIsLoading, setErrors, onReveal) {
     fetch(`/paintings/${newPainting.id}`, {
       method: "PATCH",
       headers: {
@@ -124,14 +124,19 @@ function App() {
               }
             });
 
-            const updatedUserMuse = [...user.museums];
+            const updatedUserMuse = [];
 
-            if (!user.museums.filter((muse)=> muse.id === museum.id)){
-              debugger
-              updatedUserMuse.push(museum)
+            const findNumMuseum = user.paintings.filter((paint)=> paint.museum_id === oldMuseum.id).length
+
+            if (findNumMuseum <= 1) {
+              user.museums.forEach((muse)=> {
+                if(muse.id !== oldMuseum.id){
+                  return updatedUserMuse.push(muse)
+                } else if (muse.id !== museum.id) {
+                  return updatedUserMuse.push(museum)
+                }
+              })
             }
-
-            console.log(updatedUserMuse)
 
             const userObj = {
               bio: user.bio,
