@@ -66,7 +66,7 @@ function App() {
               }
             });
 
-            const updatedUserMuse = [];
+            const userMuseumsNew = [];
             const userPaintingsMuseums = userPaintings.map((paint) => paint.museum_id);
 
             for (let i = 0; i < museums.length; i++){
@@ -84,7 +84,7 @@ function App() {
             const userObj = {
               bio: user.bio,
               id: user.id,
-              museums: updatedUserMuse,
+              museums: uniqueUserMuseums,
               paintings: userPaintings,
               username: user.username
             }
@@ -198,7 +198,7 @@ function App() {
             }
           });
 
-          const updatedUserMuse = [];
+          const userMuseumsNew = [];
           const userPaintingsMuseums = updatedUserPaintings.map((paint) => paint.museum_id);
 
           for (let i = 0; i < museums.length; i++){
