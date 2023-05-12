@@ -50,6 +50,7 @@ function App() {
         setIsLoading(false);
         if (r.ok) {
           r.json().then((data) => {
+            const userPaintings = [...user.paintings, data]
             const museum = museums.find((muse) => muse.id === data.museum_id);
             const filteredMuseums = museums.map((muse) => {
               if (muse.id === data.museum_id) {
@@ -65,23 +66,32 @@ function App() {
               }
             });
 
-            const updatedUserMuse = [...user.museums];
+            const updatedUserMuse = [];
+            const userPaintingsMuseums = userPaintings.map((paint) => paint.museum_id);
 
-            if (!user.museums.filter((muse) => muse.id === museum.id)) {
-              updatedUserMuse.push(museum)
-            }
+            for (let i = 0; i < museums.length; i++){
+              userPaintingsMuseums.forEach((muse) => {
+                if(muse === museums[i].id) {
+                  return userMuseumsNew.push(museums[i])
+                }
+              })
+            };
+
+            const uniqueUserMuseums = userMuseumsNew.filter((value, index) => {
+              return index === userMuseumsNew.findIndex(value2 => JSON.stringify(value2) === JSON.stringify(value));
+            });
 
             const userObj = {
               bio: user.bio,
               id: user.id,
               museums: updatedUserMuse,
-              paintings: [...user.paintings, data],
+              paintings: userPaintings,
               username: user.username
             }
 
             setUser(userObj);
             setMuseums(filteredMuseums);
-            setPaintings([...paintings, data]);
+            setPaintings(userPaintings);
             cleanUp();
           })
         } else {
@@ -109,6 +119,13 @@ function App() {
                 return paint
               };
             });
+            const updatedUserPaintings = user.paintings.map((paint) => {
+              if (paint.id === data.id) {
+                return data
+              } else {
+                return paint
+              }
+            });
             const museum = museums.find((muse) => muse.id === data.museum_id);
             const filteredMuseums = museums.map((muse) => {
               if (muse.id === data.museum_id) {
@@ -124,26 +141,28 @@ function App() {
               }
             });
 
-            const updatedUserMuse = [];
-            const findNumMuseum = user.paintings.filter((paint) => paint.museum_id === oldMuseum.id).length
+            const userMuseumsNew = [];
+            const userPaintingsMuseums = updatedUserPaintings.map((paint) => paint.museum_id);
 
-            if (findNumMuseum <= 1) {
-              user.museums.forEach((muse) => {
-                if (muse.id !== oldMuseum.id) {
-                  return updatedUserMuse.push(muse)
-                } else if (muse.id !== museum.id) {
-                  return updatedUserMuse.push(museum)
+            for (let i = 0; i < museums.length; i++){
+              userPaintingsMuseums.forEach((muse) => {
+                if(muse === museums[i].id) {
+                  return userMuseumsNew.push(museums[i])
                 }
               })
-            }
+            };
+
+            const uniqueUserMuseums = userMuseumsNew.filter((value, index) => {
+              return index === userMuseumsNew.findIndex(value2 => JSON.stringify(value2) === JSON.stringify(value));
+            });
 
             const userObj = {
               bio: user.bio,
               id: user.id,
-              museums: updatedUserMuse,
-              paintings: [...user.paintings, data],
+              museums: uniqueUserMuseums,
+              paintings: updatedUserPaintings,
               username: user.username
-            }
+            };
 
             setUser(userObj);
             setMuseums(filteredMuseums);
@@ -164,8 +183,7 @@ function App() {
         if (r.ok) {
           const museum = museums.find((muse) => muse.id === painting.museum_id);
           const updatedPaintings = paintings.filter((paint) => paint.id !== painting.id);
-          const updatedPaintingsUser = user.paintings.filter((paint) => paint.id !== painting.id)
-          const updatedPaintingsMuseum = museum.paintings.filter((paint) => paint.id !== painting.id)
+          const updatedUserPaintings = user.paintings.filter((paint) => paint.id !== painting.id)
           const filteredMuseums = museums.map((muse) => {
             if (muse.id === painting.museum_id) {
               return {
@@ -173,7 +191,7 @@ function App() {
                 bio: museum.bio,
                 location: museum.location,
                 name: museum.name,
-                paintings: [updatedPaintingsMuseum]
+                paintings: museum.paintings.filter((paint) => paint.id !== painting.id)
               }
             } else {
               return muse
@@ -181,21 +199,25 @@ function App() {
           });
 
           const updatedUserMuse = [];
-          const findNumMuseum = user.paintings.filter((paint) => paint.museum_id === museum.id).length
+          const userPaintingsMuseums = updatedUserPaintings.map((paint) => paint.museum_id);
 
-          if (findNumMuseum <= 1) {
-            user.museums.forEach((muse) => {
-              if (muse.id !== museum.id) {
-                return updatedUserMuse.push(muse)
+          for (let i = 0; i < museums.length; i++){
+            userPaintingsMuseums.forEach((muse) => {
+              if(muse === museums[i].id) {
+                return userMuseumsNew.push(museums[i])
               }
             })
-          }
+          };
+
+          const uniqueUserMuseums = userMuseumsNew.filter((value, index) => {
+            return index === userMuseumsNew.findIndex(value2 => JSON.stringify(value2) === JSON.stringify(value));
+          });
 
           const userObj = {
             bio: user.bio,
             id: user.id,
-            museums: updatedUserMuse,
-            paintings: updatedPaintingsUser,
+            museums: uniqueUserMuseums,
+            paintings: updatedUserPaintings,
             username: user.username
           }
 
