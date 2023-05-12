@@ -50,10 +50,11 @@ function App() {
         setIsLoading(false);
         if (r.ok) {
           r.json().then((data) => {
-            const userPaintings = [...user.paintings, data]
+            const userPaintings = [...user.paintings, data];
             const museum = museums.find((muse) => muse.id === data.museum_id);
             const filteredMuseums = museums.map((muse) => {
               if (muse.id === data.museum_id) {
+                
                 return {
                   id: museum.id,
                   bio: museum.bio,
@@ -91,7 +92,7 @@ function App() {
 
             setUser(userObj);
             setMuseums(filteredMuseums);
-            setPaintings(userPaintings);
+            setPaintings([...paintings, data]);
             cleanUp();
           })
         } else {
