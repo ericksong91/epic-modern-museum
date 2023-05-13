@@ -81,10 +81,12 @@ function UserProvider({ children }) {
             })
     };
 
-    //Add Delete ACcount
+    function onDelete() {
+        console.log("You deleted")
+    }
 
     return (
-        <UserContext.Provider value={{ user, artists, setUser, logout, login, signup }}>
+        <UserContext.Provider value={{ user, artists, setUser, logout, login, signup, onDelete }}>
             {children}
         </UserContext.Provider>
     )

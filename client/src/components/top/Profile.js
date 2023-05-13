@@ -3,15 +3,14 @@ import { UserContext } from '../context/user'
 import PaintingCard from '../cards/PaintingCard';
 import MuseumCard from '../cards/MuseumCard';
 import NewPaintingForm from '../NewPaintingForm';
-import { Navigate } from 'react-router-dom';
-import { Grid, Container, Button } from '@mui/material';
+import { Grid, Container, Button, Card } from '@mui/material';
 
 function Profile({ museums, paintings, artists, onNewPainting }) {
     const [show, setShow] = useState(false);
-    const { user } = useContext(UserContext);
+    const { user, onDelete } = useContext(UserContext);
 
     if (!user) {
-        return <Navigate replace to="/" />;
+        return <div></div>;
     }
 
     const userPaintings = paintings.filter((paint) => paint.user_id === user.id).map((paint) => {
@@ -22,6 +21,14 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
         return <Grid item xs={12} sm={6} md={4} key={muse.id}><MuseumCard museum={muse} /></Grid>
     });
 
+    function handleDelete() {
+        if (window.confirm("Are you sure you want to delete your account?")) {
+            console.log("Deleted")
+            onDelete()
+        } else {
+            console.log("Your account is safe....for now! :)")
+        }
+    }
 
     return (
         <div className="Profile">
@@ -42,6 +49,9 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
                     {userMuseums}
                 </Grid>
             </Container>
+            <Card sx={{ m: 3 }}>
+                <Button variant="contained" color="error" sx={{ m: 3 }} onClick={handleDelete}>Delete Account</Button>
+            </Card>
         </div>
     );
 }

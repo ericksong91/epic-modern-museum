@@ -13,7 +13,7 @@ function Homepage() {
     return (
         <div className="Homepage">
             <h1>Welcome to Epic Modern Museum!</h1>
-            <h2>You are welcome to explore all the paintings we have to offer as a guest or curator!</h2>
+            <h2>You are welcome to explore all the paintings we have to offer as a guest or as an artist!</h2>
             <Grid container spacing={2} justifyContent={'center'}>
                 <Grid item>
                     <Card>
@@ -27,7 +27,6 @@ function Homepage() {
                         {!user ? <Link to={'/locations'}><Button variant="contained">Explore Museums as a Guest</Button></Link> :
                             <Link to={'/locations'}><Button variant="contained">Explore Museums</Button></Link>}
                     </Card>
-
                 </Grid>
                 <Grid item>
                     <Card>
