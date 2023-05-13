@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   #General Resources
   resources :paintings, only: [:index, :create, :update, :destroy]
   resources :museums, only: [:index]
-  resources :users, only: [:index]
+  resources :users, only: [:index, :destroy]
 
   #User Routing, signups, profile, login, logout
   post "/signup", to: "users#create"
