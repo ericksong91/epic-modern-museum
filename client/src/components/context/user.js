@@ -13,7 +13,7 @@ function UserProvider({ children }) {
                     res.json().then((data) => setUser(data))
                 }
             })
-    }, [])
+    }, []);
 
     useEffect(() => {
         fetch("/users")
@@ -24,7 +24,7 @@ function UserProvider({ children }) {
                     r.json().then((error) => alert(error.errors))
                 }
             })
-    }, [])
+    }, []);
 
     function logout() {
         fetch("/logout", { method: "DELETE" })
@@ -33,7 +33,7 @@ function UserProvider({ children }) {
                     setUser(null)
                 }
             })
-    }
+    };
 
     function login(username, password, setIsLoading, setErrors) {
         setErrors([]);
@@ -52,7 +52,7 @@ function UserProvider({ children }) {
                     r.json().then((error) => setErrors(error.errors));
                 }
             });
-    }
+    };
 
     function signup(username, password, passwordConfirmation, bio, setIsLoading, setErrors) {
         setErrors([]);
@@ -81,9 +81,26 @@ function UserProvider({ children }) {
             })
     };
 
-    function onDelete() {
-        console.log("You deleted")
-    }
+    function onDelete(id) {
+        fetch(`/users/${id}`, {
+            method: 'DELETE'
+        })
+            .then((r) => {
+                if (r.ok) {
+                    const filteredArtists = artists.map((artist) => {
+                        if (artist.id === id) {
+                            return
+                        } else {
+                            return artist
+                        }
+                    });
+                    setUser(null);
+                    setArtists(filteredArtists);
+                } else {
+                    r.json().then((error) => setErrors(error.errors));
+                }
+            })
+    };
 
     return (
         <UserContext.Provider value={{ user, artists, setUser, logout, login, signup, onDelete }}>

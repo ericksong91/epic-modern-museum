@@ -7,6 +7,8 @@ import { Grid, Container, Button, Card } from '@mui/material';
 
 function Profile({ museums, paintings, artists, onNewPainting }) {
     const [show, setShow] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState([]);
     const { user, onDelete } = useContext(UserContext);
 
     if (!user) {
@@ -24,7 +26,7 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
     function handleDelete() {
         if (window.confirm("Are you sure you want to delete your account?")) {
             console.log("Deleted")
-            onDelete()
+            onDelete(user.id)
         } else {
             console.log("Your account is safe....for now! :)")
         }
