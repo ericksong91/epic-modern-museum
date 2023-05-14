@@ -70,21 +70,13 @@ function App() {
             const userMuseumsNew = [];
             const userPaintingsMuseums = userPaintings.map((paint) => paint.museum_id);
 
-            for (let i = 0; i < museums.length; i++) {
-              userPaintingsMuseums.forEach((muse) => {
-                if (muse === museums[i].id) {
-                  return userMuseumsNew.push(museums[i])
+            museums.forEach((museum)=> {
+              userPaintingsMuseums.forEach((muse)=>{
+                if(muse === museum.id) {
+                  return userMuseumsNew.push(museum)
                 }
               })
-            };
-
-            // museums.forEach((museum)=> {
-            //   userPaintingsMuseums.forEach((muse)=>{
-            //     if(muse === museum.id) {
-            //       return userMuseumsNew.push(museum)
-            //     }
-            //   })
-            // })
+            })
 
             const uniqueUserMuseums = userMuseumsNew.filter((value, index) => {
               return index === userMuseumsNew.findIndex(value2 => JSON.stringify(value2) === JSON.stringify(value));

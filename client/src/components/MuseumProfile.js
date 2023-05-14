@@ -15,6 +15,10 @@ function MuseumProfile({ museums, paintings, artists }) {
         return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} artists={artists} /></Grid>
     })
 
+    if(Object.keys(museum).length === 0) {
+        return <div></div>
+    }
+
     return (
         <div className="MuseumProfile">
             <Container maxWidth="lg">
