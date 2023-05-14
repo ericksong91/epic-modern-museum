@@ -81,29 +81,30 @@ function UserProvider({ children }) {
             })
     };
 
-    function onDelete(id, setErrors) {
-        fetch(`/users/${id}`, {
-            method: 'DELETE'
-        })
-            .then((r) => {
-                if (r.ok) {
-                    const filteredArtists = artists.map((artist) => {
-                        if (artist.id === id) {
-                            return
-                        } else {
-                            return artist
-                        }
-                    });
-                    setUser(null);
-                    setArtists(filteredArtists);
-                } else {
-                    r.json().then((error) => setErrors(error.errors));
-                }
-            })
-    };
+    // function onDelete(id, setErrors, setIsLoading) {
+    //     fetch(`/users/${id}`, {
+    //         method: 'DELETE'
+    //     })
+    //         .then((r) => {
+    //             setIsLoading(false);
+    //             if (r.ok) {
+    //                 const filteredArtists = artists.map((artist) => {
+    //                     if (artist.id === id) {
+    //                         return
+    //                     } else {
+    //                         return artist
+    //                     }
+    //                 });
+    //                 setUser(null);
+    //                 setArtists(filteredArtists);
+    //             } else {
+    //                 r.json().then((error) => setErrors(error.errors));
+    //             }
+    //         })
+    // };
 
     return (
-        <UserContext.Provider value={{ user, artists, setUser, logout, login, signup, onDelete }}>
+        <UserContext.Provider value={{ user, artists, setUser, logout, login, signup }}>
             {children}
         </UserContext.Provider>
     )
