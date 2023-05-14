@@ -3,15 +3,15 @@ import { UserContext } from '../context/user'
 import PaintingCard from '../cards/PaintingCard';
 import MuseumCard from '../cards/MuseumCard';
 import NewPaintingForm from '../NewPaintingForm';
-// import { Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Grid, Container, Button } from '@mui/material';
-// import { Card, CardContent } from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 
-function Profile({ museums, paintings, artists, onNewPainting }) {
+function Profile({ museums, paintings, artists, onNewPainting, setPaintings }) {
     const [show, setShow] = useState(false);
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [errors, setErrors] = useState([]);
-    const { user } = useContext(UserContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errors, setErrors] = useState([]);
+    const { user, onDelete } = useContext(UserContext);
 
     if (!user) {
         return <div></div>;
@@ -25,16 +25,17 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
         return <Grid item xs={12} sm={6} md={4} key={muse.id}><MuseumCard museum={muse} /></Grid>
     });
 
-    // function handleDelete() {
-    //     setIsLoading(true);
-    //     if (window.confirm("Are you sure you want to delete your account?")) {
-    //         console.log("Deleted");
-    //         onDelete(user.id, setErrors, setIsLoading);
-    //         <Navigate replace to="/" />;
-    //     } else {
-    //         console.log("Your account is safe....for now! :)");
-    //     }
-    // };
+    function handleDelete() {
+        setIsLoading(true);
+        if (window.confirm("Are you sure you want to delete your account?")) {
+            console.log("Deleted");
+            onDelete(user.id, paintings, setErrors, setIsLoading, setPaintings);
+            <Navigate replace to="/" />;
+        } else {
+            console.log("Your account is safe....for now! :)");
+            setIsLoading(false);
+        }
+    };
 
     return (
         <div className="Profile">
@@ -55,7 +56,7 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
                     {userMuseums}
                 </Grid>
             </Container>
-            {/* <Card sx={{ m: 3 }}>
+            <Card sx={{ m: 3 }}>
                 {isLoading ?
                     <Button
                         variant="contained"
@@ -71,7 +72,7 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
                 <CardContent>
                     {errors}
                 </CardContent>
-            </Card> */}
+            </Card>
         </div>
     );
 }

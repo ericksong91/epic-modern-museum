@@ -29,6 +29,7 @@ function App() {
             const paintingList = [];
             data.forEach((museum) => museum.paintings.forEach((paint) => paintingList.push(paint)));
             paintingList.sort((a, b) => a.id - b.id);
+            console.log(paintingList)
             setMuseums(data);
             setPaintings(paintingList);
           })
@@ -54,7 +55,7 @@ function App() {
             const museum = museums.find((muse) => muse.id === data.museum_id);
             const filteredMuseums = museums.map((muse) => {
               if (muse.id === data.museum_id) {
-                
+
                 return {
                   id: museum.id,
                   bio: museum.bio,
@@ -70,13 +71,21 @@ function App() {
             const userMuseumsNew = [];
             const userPaintingsMuseums = userPaintings.map((paint) => paint.museum_id);
 
-            for (let i = 0; i < museums.length; i++){
+            for (let i = 0; i < museums.length; i++) {
               userPaintingsMuseums.forEach((muse) => {
-                if(muse === museums[i].id) {
+                if (muse === museums[i].id) {
                   return userMuseumsNew.push(museums[i])
                 }
               })
             };
+
+            // museums.forEach((museum)=> {
+            //   userPaintingsMuseums.forEach((muse)=>{
+            //     if(muse === museum.id) {
+            //       return userMuseumsNew.push(museum)
+            //     }
+            //   })
+            // })
 
             const uniqueUserMuseums = userMuseumsNew.filter((value, index) => {
               return index === userMuseumsNew.findIndex(value2 => JSON.stringify(value2) === JSON.stringify(value));
@@ -145,9 +154,9 @@ function App() {
             const userMuseumsNew = [];
             const userPaintingsMuseums = updatedUserPaintings.map((paint) => paint.museum_id);
 
-            for (let i = 0; i < museums.length; i++){
+            for (let i = 0; i < museums.length; i++) {
               userPaintingsMuseums.forEach((muse) => {
-                if(muse === museums[i].id) {
+                if (muse === museums[i].id) {
                   return userMuseumsNew.push(museums[i])
                 }
               })
@@ -202,9 +211,9 @@ function App() {
           const userMuseumsNew = [];
           const userPaintingsMuseums = updatedUserPaintings.map((paint) => paint.museum_id);
 
-          for (let i = 0; i < museums.length; i++){
+          for (let i = 0; i < museums.length; i++) {
             userPaintingsMuseums.forEach((muse) => {
-              if(muse === museums[i].id) {
+              if (muse === museums[i].id) {
                 return userMuseumsNew.push(museums[i])
               }
             })
@@ -240,7 +249,7 @@ function App() {
           <Route path='/' element={<Homepage />} />
           <Route path='/profile' element={
             <Profile museums={museums} paintings={paintings} artists={artists}
-              onNewPainting={handleNewPainting} />
+              onNewPainting={handleNewPainting} setPaintings={setPaintings} />
           } />
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} artists={artists} />} />

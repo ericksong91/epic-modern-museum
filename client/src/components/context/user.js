@@ -81,30 +81,43 @@ function UserProvider({ children }) {
             })
     };
 
-    // function onDelete(id, setErrors, setIsLoading) {
-    //     fetch(`/users/${id}`, {
-    //         method: 'DELETE'
-    //     })
-    //         .then((r) => {
-    //             setIsLoading(false);
-    //             if (r.ok) {
-    //                 const filteredArtists = artists.map((artist) => {
-    //                     if (artist.id === id) {
-    //                         return
-    //                     } else {
-    //                         return artist
-    //                     }
-    //                 });
-    //                 setUser(null);
-    //                 setArtists(filteredArtists);
-    //             } else {
-    //                 r.json().then((error) => setErrors(error.errors));
-    //             }
-    //         })
-    // };
+    function onDelete(id, paintings, setErrors, setIsLoading, setPaintings) {
+        fetch(`/users/${id}`, {
+            method: 'DELETE'
+        })
+            .then((r) => {
+                setIsLoading(false);
+                if (r.ok) {
+                    const newPaintingList = [];
+                    const filteredArtists = [];
+                    artists.forEach((artist) => {
+                        if (artist.id === id) {
+                            return
+                        } else {
+                            return filteredArtists.push(artist)
+                        }
+                    });
+                    filteredArtists.forEach((artist) => {
+                        paintings.forEach((painting) => {
+                            if (painting.user_id === artist.id) {
+                                return newPaintingList.push(painting)
+                            }
+                        })
+                    });
+                    newPaintingList.sort((a, b) => a.id - b.id);
+                    console.log(newPaintingList);
+                    console.log(filteredArtists)
+                    setUser(null);
+                    setArtists(filteredArtists);
+                    setPaintings(newPaintingList);
+                } else {
+                    r.json().then((error) => setErrors(error.errors));
+                }
+            })
+    };
 
     return (
-        <UserContext.Provider value={{ user, artists, setUser, logout, login, signup }}>
+        <UserContext.Provider value={{ user, artists, setUser, logout, login, signup, onDelete }}>
             {children}
         </UserContext.Provider>
     )
