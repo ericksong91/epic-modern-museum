@@ -9,7 +9,7 @@ import Profile from '../top/Profile';
 import Museums from '../Museums';
 import MuseumProfile from '../MuseumProfile';
 import PaintingProfile from '../PaintingProfile';
-import { Container } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import '../../css/App.css';
 import {
   Routes,
@@ -70,9 +70,9 @@ function App() {
             const userMuseumsNew = [];
             const userPaintingsMuseums = userPaintings.map((paint) => paint.museum_id);
 
-            museums.forEach((museum)=> {
-              userPaintingsMuseums.forEach((muse)=>{
-                if(muse === museum.id) {
+            museums.forEach((museum) => {
+              userPaintingsMuseums.forEach((muse) => {
+                if (muse === museum.id) {
                   return userMuseumsNew.push(museum)
                 }
               })
@@ -235,22 +235,24 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Container maxWidth="lg">
-        <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='/profile' element={
-            <Profile museums={museums} paintings={paintings} artists={artists}
-              onNewPainting={handleNewPainting} setPaintings={setPaintings} />
-          } />
-          <Route path='/locations' element={<Museums museums={museums} />} />
-          <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} artists={artists} />} />
-          <Route path='/paintings/:id' element={
-            <PaintingProfile paintings={paintings} museums={museums} artists={artists}
-              onEditPainting={handleEditPainting} onDeletePainting={handleDeletePainting} />
-          } />
-          <Route path='/login' element={<LoginForm />} />
-          <Route path='/signup' element={<SignupForm />} />
-        </Routes>
+      <Container maxWidth="lg" className="InnerApp">
+        <Box className="InnerMostApp">
+          <Routes>
+            <Route path='/' element={<Homepage />} />
+            <Route path='/profile' element={
+              <Profile museums={museums} paintings={paintings} artists={artists}
+                onNewPainting={handleNewPainting} setPaintings={setPaintings} />
+            } />
+            <Route path='/locations' element={<Museums museums={museums} />} />
+            <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} artists={artists} />} />
+            <Route path='/paintings/:id' element={
+              <PaintingProfile paintings={paintings} museums={museums} artists={artists}
+                onEditPainting={handleEditPainting} onDeletePainting={handleDeletePainting} />
+            } />
+            <Route path='/login' element={<LoginForm />} />
+            <Route path='/signup' element={<SignupForm />} />
+          </Routes>
+        </Box>
       </Container>
 
     </div>

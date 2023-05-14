@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 import { Button, Grid, Card, CardMedia } from '@mui/material';
 import '../../css/App.css';
 
-
 function Homepage() {
+    //Credits, Wikipedia,  Clipart org and https://www.pexels.com/photo/paintings-inside-building-3004909/ for BG
     const { user } = useContext(UserContext);
     const museumURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/National_Museum_of_African_American_History_and_Culture_in_February_2020.jpg/1280px-National_Museum_of_African_American_History_and_Culture_in_February_2020.jpg";
     const artistURL = "https://upload.wikimedia.org/wikipedia/en/7/70/Bob_at_Easel.jpg"

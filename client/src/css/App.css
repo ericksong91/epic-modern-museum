@@ -1,7 +1,6 @@
 .App {
   text-align: center;
-  color: white;
-  background-color: rgb(190, 79, 91);
+  background-color: rgba(76, 22, 22, 0.75);
   padding: 2rem;
   margin: 2rem;
 }

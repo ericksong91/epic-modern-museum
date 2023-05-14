@@ -26,7 +26,7 @@ function MuseumProfile({ museums, paintings, artists }) {
                 <h3>{museum.bio}</h3>
                 <h3>Located at {museum.location}</h3>
 
-                <h2>Gallery</h2>
+                <h2>Epic Gallery:</h2>
                 <Grid container spacing={4}>
                     {paintingCards}
                 </Grid>
