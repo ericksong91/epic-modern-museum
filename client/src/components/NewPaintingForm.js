@@ -77,6 +77,8 @@ function NewPaintingForm({ museums, onShow, onNewPainting }) {
                                         margin="normal"
                                         required
                                         fullWidth
+                                        multiline={true}
+                                        minRows={4}
                                         id="bio"
                                         name="bio"
                                         type="text"
