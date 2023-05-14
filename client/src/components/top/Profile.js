@@ -3,7 +3,7 @@ import { UserContext } from '../context/user'
 import PaintingCard from '../cards/PaintingCard';
 import MuseumCard from '../cards/MuseumCard';
 import NewPaintingForm from '../NewPaintingForm';
-import { Grid, Container, Button, Card } from '@mui/material';
+import { Grid, Container, Button, Card, CardContent } from '@mui/material';
 
 function Profile({ museums, paintings, artists, onNewPainting }) {
     const [show, setShow] = useState(false);
@@ -26,7 +26,7 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
     function handleDelete() {
         if (window.confirm("Are you sure you want to delete your account?")) {
             console.log("Deleted")
-            onDelete(user.id)
+            onDelete(user.id, setErrors, setIsLoading)
         } else {
             console.log("Your account is safe....for now! :)")
         }
@@ -53,6 +53,9 @@ function Profile({ museums, paintings, artists, onNewPainting }) {
             </Container>
             <Card sx={{ m: 3 }}>
                 <Button variant="contained" color="error" sx={{ m: 3 }} onClick={handleDelete}>Delete Account</Button>
+                <CardContent>
+                    {errors}
+                </CardContent>
             </Card>
         </div>
     );

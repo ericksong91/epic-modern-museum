@@ -81,7 +81,7 @@ function UserProvider({ children }) {
             })
     };
 
-    function onDelete(id) {
+    function onDelete(id, setErrors) {
         fetch(`/users/${id}`, {
             method: 'DELETE'
         })

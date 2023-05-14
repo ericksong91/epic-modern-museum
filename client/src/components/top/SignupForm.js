@@ -83,14 +83,19 @@ function SignupForm() {
                         value={bio}
                         onChange={(e) => { setBio(e.target.value) }}
                     />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                    >
-                        {isLoading ? "Loading..." : "Sign Up"}
-                    </Button>
+                    {isLoading ?
+                        <Button
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >Loading...</Button>
+                        :
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >Signup</Button>}
                     {errors}
                 </Box>
             </Box>

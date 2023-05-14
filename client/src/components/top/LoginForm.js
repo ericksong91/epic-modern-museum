@@ -57,26 +57,31 @@ function LoginForm() {
             value={password}
             onChange={(e) => { setPassword(e.target.value) }}
           />
+          {isLoading ?
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >Loading...</Button>
+            : 
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >Login</Button>}
+              {errors}
+            </Box>
+      </Box>
+        <Link to="/signup">
           <Button
             type="submit"
-            fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            {isLoading ? "Loading..." : "Login"}
+            Don't have an account? Signup!
           </Button>
-          {errors}
-        </Box>
-      </Box>
-      <Link to="/signup">
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Don't have an account? Signup!
-        </Button>
-      </Link>
+        </Link>
     </Container>
   );
 }
