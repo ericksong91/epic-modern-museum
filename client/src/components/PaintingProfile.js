@@ -33,7 +33,7 @@ function PaintingProfile({ museums, paintings, artists, onEditPainting, onDelete
         }
     }, [user, painting.user_id]);
 
-    if(painting === undefined) {
+    if(Object.keys(painting).length === 0) {
         return <div></div>
     }
 

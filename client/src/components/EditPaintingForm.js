@@ -17,11 +17,10 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
     const [selectMuseum, setSelectMuseum] = useState(museum.name);
     const museumList = museums.map((muse) => <MenuItem key={muse.id} value={muse.name}>{muse.name}</MenuItem>);
 
-    //Change MuseumObj to Find
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
-        const museumObj = museums.filter((muse) => muse.name === selectMuseum);
+        const museumObj = museums.find((muse) => muse.name === selectMuseum);
 
         const paintObj = {
             id: painting.id,
@@ -29,7 +28,7 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
             bio,
             img_url: image,
             year,
-            museum_id: museumObj[0].id
+            museum_id: museumObj.id
         };
 
         onEditPainting(paintObj, museum, setIsLoading, setErrors, onReveal);
