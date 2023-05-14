@@ -29,7 +29,6 @@ function App() {
             const paintingList = [];
             data.forEach((museum) => museum.paintings.forEach((paint) => paintingList.push(paint)));
             paintingList.sort((a, b) => a.id - b.id);
-            console.log(paintingList)
             setMuseums(data);
             setPaintings(paintingList);
           })

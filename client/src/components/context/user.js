@@ -105,8 +105,6 @@ function UserProvider({ children }) {
                         })
                     });
                     newPaintingList.sort((a, b) => a.id - b.id);
-                    console.log(newPaintingList);
-                    console.log(filteredArtists)
                     setUser(null);
                     setArtists(filteredArtists);
                     setPaintings(newPaintingList);

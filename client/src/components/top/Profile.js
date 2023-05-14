@@ -28,11 +28,9 @@ function Profile({ museums, paintings, artists, onNewPainting, setPaintings }) {
     function handleDelete() {
         setIsLoading(true);
         if (window.confirm("Are you sure you want to delete your account?")) {
-            console.log("Deleted");
             onDelete(user.id, paintings, setErrors, setIsLoading, setPaintings);
             <Navigate replace to="/" />;
         } else {
-            console.log("Your account is safe....for now! :)");
             setIsLoading(false);
         }
     };
