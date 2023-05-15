@@ -9,7 +9,7 @@ import Profile from '../top/Profile';
 import Museums from '../Museums';
 import MuseumProfile from '../MuseumProfile';
 import PaintingProfile from '../PaintingProfile';
-import { Container, Box } from '@mui/material';
+import { Container } from '@mui/material';
 import '../../css/App.css';
 import {
   Routes,
@@ -38,6 +38,8 @@ function App() {
       })
   }, [])
 
+  //Happens only once on page load, don't need to update museum paintings state every time, only paintings
+
   function handleNewPainting(newPainting, setIsLoading, setErrors, cleanUp) {
     fetch('/paintings', {
       method: "POST",
@@ -50,33 +52,31 @@ function App() {
         setIsLoading(false);
         if (r.ok) {
           r.json().then((data) => {
-            const userPaintings = [...user.paintings, data];
+            const updatedUserPaintings = [...user.paintings, data];
             const museum = museums.find((muse) => muse.id === data.museum_id);
-            const filteredMuseums = museums.map((muse) => {
-              if (muse.id === data.museum_id) {
-
-                return {
-                  id: museum.id,
-                  bio: museum.bio,
-                  location: museum.location,
-                  name: museum.name,
-                  paintings: [...museum.paintings, data]
-                }
-              } else {
-                return muse
-              }
-            });
+            // const filteredMuseums = museums.map((muse) => {
+            //   if (muse.id === data.museum_id) {
+            //     return {
+            //       id: museum.id,
+            //       bio: museum.bio,
+            //       location: museum.location,
+            //       name: museum.name,
+            //       paintings: [...museum.paintings, data]
+            //     }
+            //   } else {
+            //     return muse
+            //   }
+            // });
 
             const userMuseumsNew = [];
-            const userPaintingsMuseums = userPaintings.map((paint) => paint.museum_id);
-
+            
             museums.forEach((museum) => {
-              userPaintingsMuseums.forEach((muse) => {
-                if (muse === museum.id) {
-                  return userMuseumsNew.push(museum)
-                }
-              })
-            })
+              updatedUserPaintings.forEach((paint) => {
+                if (paint.museum_id === museum.id) {
+                  return userMuseumsNew.push(museum);
+                };
+              });
+            });
 
             const uniqueUserMuseums = userMuseumsNew.filter((value, index) => {
               return index === userMuseumsNew.findIndex(value2 => JSON.stringify(value2) === JSON.stringify(value));
@@ -86,12 +86,12 @@ function App() {
               bio: user.bio,
               id: user.id,
               museums: uniqueUserMuseums,
-              paintings: userPaintings,
+              paintings: updatedUserPaintings,
               username: user.username
             }
 
             setUser(userObj);
-            setMuseums(filteredMuseums);
+            // setMuseums(filteredMuseums);
             setPaintings([...paintings, data]);
             cleanUp();
           })
@@ -101,7 +101,7 @@ function App() {
       })
   }
 
-  function handleEditPainting(newPainting, oldMuseum, setIsLoading, setErrors, onReveal) {
+  function handleEditPainting(newPainting, setIsLoading, setErrors, onReveal) {
     fetch(`/paintings/${newPainting.id}`, {
       method: "PATCH",
       headers: {
@@ -128,30 +128,29 @@ function App() {
               }
             });
             const museum = museums.find((muse) => muse.id === data.museum_id);
-            const filteredMuseums = museums.map((muse) => {
-              if (muse.id === data.museum_id) {
-                return {
-                  id: museum.id,
-                  bio: museum.bio,
-                  location: museum.location,
-                  name: museum.name,
-                  paintings: [...museum.paintings, data]
-                }
-              } else {
-                return muse
-              }
-            });
+            // const filteredMuseums = museums.map((muse) => {
+            //   if (muse.id === data.museum_id) {
+            //     return {
+            //       id: museum.id,
+            //       bio: museum.bio,
+            //       location: museum.location,
+            //       name: museum.name,
+            //       paintings: [...museum.paintings, data]
+            //     }
+            //   } else {
+            //     return muse
+            //   }
+            // });
 
             const userMuseumsNew = [];
-            const userPaintingsMuseums = updatedUserPaintings.map((paint) => paint.museum_id);
 
-            for (let i = 0; i < museums.length; i++) {
-              userPaintingsMuseums.forEach((muse) => {
-                if (muse === museums[i].id) {
-                  return userMuseumsNew.push(museums[i])
-                }
-              })
-            };
+            museums.forEach((museum) => {
+              updatedUserPaintings.forEach((muse) => {
+                if (muse.museum_id === museum.id) {
+                  return userMuseumsNew.push(museum);
+                };
+              });
+            });
 
             const uniqueUserMuseums = userMuseumsNew.filter((value, index) => {
               return index === userMuseumsNew.findIndex(value2 => JSON.stringify(value2) === JSON.stringify(value));
@@ -166,7 +165,7 @@ function App() {
             };
 
             setUser(userObj);
-            setMuseums(filteredMuseums);
+            // setMuseums(filteredMuseums);
             setPaintings(updatedPaintings);
             onReveal(false);
           })
@@ -235,24 +234,22 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <Container maxWidth="lg" className="InnerApp">
-        <Box className="InnerMostApp">
-          <Routes>
-            <Route path='/' element={<Homepage />} />
-            <Route path='/profile' element={
-              <Profile museums={museums} paintings={paintings} artists={artists}
-                onNewPainting={handleNewPainting} setPaintings={setPaintings} />
-            } />
-            <Route path='/locations' element={<Museums museums={museums} />} />
-            <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} artists={artists} />} />
-            <Route path='/paintings/:id' element={
-              <PaintingProfile paintings={paintings} museums={museums} artists={artists}
-                onEditPainting={handleEditPainting} onDeletePainting={handleDeletePainting} />
-            } />
-            <Route path='/login' element={<LoginForm />} />
-            <Route path='/signup' element={<SignupForm />} />
-          </Routes>
-        </Box>
+      <Container maxWidth="lg">
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='/profile' element={
+            <Profile museums={museums} paintings={paintings} artists={artists}
+              onNewPainting={handleNewPainting} setPaintings={setPaintings} />
+          } />
+          <Route path='/locations' element={<Museums museums={museums} />} />
+          <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} artists={artists} />} />
+          <Route path='/paintings/:id' element={
+            <PaintingProfile paintings={paintings} museums={museums} artists={artists}
+              onEditPainting={handleEditPainting} onDeletePainting={handleDeletePainting} />
+          } />
+          <Route path='/login' element={<LoginForm />} />
+          <Route path='/signup' element={<SignupForm />} />
+        </Routes>
       </Container>
 
     </div>

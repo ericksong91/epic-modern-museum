@@ -7,17 +7,17 @@ function MuseumProfile({ museums, paintings, artists }) {
     const museum = museums.find((museum) => museum.id === index) === undefined ?
         {}
         :
-        museums.find((museum) => museum.id === index)
+        museums.find((museum) => museum.id === index);
 
-    const paintingsList = paintings.filter((paint) => paint.museum_id === index)
+    const paintingsList = paintings.filter((paint) => paint.museum_id === index);
 
     const paintingCards = paintingsList.map((paint) => {
         return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} artists={artists} /></Grid>
-    })
+    });
 
     if(Object.keys(museum).length === 0) {
         return <div></div>
-    }
+    };
 
     return (
         <div className="MuseumProfile">
