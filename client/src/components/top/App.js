@@ -184,30 +184,32 @@ function App() {
           const museum = museums.find((muse) => muse.id === painting.museum_id);
           const updatedPaintings = paintings.filter((paint) => paint.id !== painting.id);
           const updatedUserPaintings = user.paintings.filter((paint) => paint.id !== painting.id)
-          const filteredMuseums = museums.map((muse) => {
-            if (muse.id === painting.museum_id) {
-              return {
-                id: museum.id,
-                bio: museum.bio,
-                location: museum.location,
-                name: museum.name,
-                paintings: museum.paintings.filter((paint) => paint.id !== painting.id)
-              }
-            } else {
-              return muse
-            }
-          });
+          // const filteredMuseums = museums.map((muse) => {
+          //   if (muse.id === painting.museum_id) {
+          //     return {
+          //       id: museum.id,
+          //       bio: museum.bio,
+          //       location: museum.location,
+          //       name: museum.name,
+          //       paintings: museum.paintings.filter((paint) => paint.id !== painting.id)
+          //     }
+          //   } else {
+          //     return muse
+          //   }
+          // });
+
+          // const userMuseumsNew = [];
+          // const userPaintingsMuseums = updatedUserPaintings.map((paint) => paint.museum_id);
 
           const userMuseumsNew = [];
-          const userPaintingsMuseums = updatedUserPaintings.map((paint) => paint.museum_id);
 
-          for (let i = 0; i < museums.length; i++) {
-            userPaintingsMuseums.forEach((muse) => {
-              if (muse === museums[i].id) {
-                return userMuseumsNew.push(museums[i])
-              }
-            })
-          };
+          museums.forEach((museum) => {
+            updatedUserPaintings.forEach((muse) => {
+              if (muse.museum_id === museum.id) {
+                return userMuseumsNew.push(museum);
+              };
+            });
+          });
 
           const uniqueUserMuseums = userMuseumsNew.filter((value, index) => {
             return index === userMuseumsNew.findIndex(value2 => JSON.stringify(value2) === JSON.stringify(value));
@@ -222,7 +224,7 @@ function App() {
           }
 
           setUser(userObj);
-          setMuseums(filteredMuseums);
+          // setMuseums(filteredMuseums);
           setPaintings(updatedPaintings);
           navigate(-1);
         } else {
