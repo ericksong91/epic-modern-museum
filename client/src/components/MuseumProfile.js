@@ -2,21 +2,24 @@ import { useParams } from "react-router-dom";
 import PaintingCard from "./cards/PaintingCard";
 import { Grid, Container } from '@mui/material';
 
-function MuseumProfile({ museums, paintings, artists }) {
+function MuseumProfile({ museums, artists }) {
     const index = parseInt(useParams().id);
     const museum = museums.find((museum) => museum.id === index) === undefined ?
         {}
         :
         museums.find((museum) => museum.id === index);
 
-    const paintingsList = paintings.filter((paint) => paint.museum_id === index);
+    const paintingsList = Object.keys(museum).length === 0 ?
+        []
+        :
+        museum.paintings.filter((paint) => paint.museum_id === index);
 
     const paintingCards = paintingsList.map((paint) => {
         return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} artists={artists} /></Grid>
     });
 
-    if(Object.keys(museum).length === 0) {
-        return <div></div>
+    if (Object.keys(museum).length === 0) {
+        return <div>Loading...</div>
     };
 
     return (

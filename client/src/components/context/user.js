@@ -6,6 +6,8 @@ function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     const [artists, setArtists] = useState([]);
 
+    // console.log(artists)
+
     useEffect(() => {
         fetch('/me')
             .then(res => {
