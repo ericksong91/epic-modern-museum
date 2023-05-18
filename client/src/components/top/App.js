@@ -18,22 +18,14 @@ import {
 
 function App() {
   const [museums, setMuseums] = useState([]);
-  // const [paintings, setPaintings] = useState([]);
   const { user, setUser, artists } = useContext(UserContext);
-
-  //Refactor code so that it only uses Museums.paintings and Users.paintings
-  //First the initial fetch. Only grab museums, set no paintings state.
 
   useEffect(() => {
     fetch("/museums")
       .then((r) => {
         if (r.ok) {
           r.json().then((data) => {
-            // const paintingList = [];
-            // data.forEach((museum) => museum.paintings.forEach((paint) => paintingList.push(paint)));
-            // paintingList.sort((a, b) => a.id - b.id);
             setMuseums(data);
-            // setPaintings(paintingList);
           })
         } else {
           r.json().then((error) => alert(error.errors));
@@ -92,7 +84,6 @@ function App() {
 
             setUser(userObj);
             setMuseums(filteredMuseums);
-            // setPaintings([...paintings, data]);
             cleanUp();
           })
         } else {
@@ -113,13 +104,6 @@ function App() {
         setIsLoading(false);
         if (r.ok) {
           r.json().then((data) => {
-            // const updatedPaintings = paintings.map((paint) => {
-            //   if (paint.id === data.id) {
-            //     return data
-            //   } else {
-            //     return paint
-            //   };
-            // });
             const updatedUserPaintings = user.paintings.map((paint) => {
               if (paint.id === data.id) {
                 return data
@@ -149,9 +133,6 @@ function App() {
               };
             });
 
-            //Grab old museum id, remove painting using else if (muse.id === oldMuseum.id)
-            //Write out the object and write in your own paintings array
-
             const userMuseumsNew = [];
 
             museums.forEach((museum) => {
@@ -176,7 +157,6 @@ function App() {
 
             setUser(userObj);
             setMuseums(filteredMuseums);
-            // setPaintings(updatedPaintings);
             onReveal(false);
           })
         } else {

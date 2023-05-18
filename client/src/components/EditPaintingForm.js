@@ -32,7 +32,7 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
         };
 
         onEditPainting(paintObj, painting.museum_id, setIsLoading, setErrors, onReveal);
-    }
+    };
 
     return (
         <div className="EditPaintingForm">
