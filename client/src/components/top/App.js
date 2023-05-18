@@ -54,15 +54,14 @@ function App() {
         if (r.ok) {
           r.json().then((data) => {
             const updatedUserPaintings = [...user.paintings, data];
-            const museum = museums.find((muse) => muse.id === data.museum_id);
             const filteredMuseums = museums.map((muse) => {
               if (muse.id === data.museum_id) {
                 return {
-                  id: museum.id,
-                  bio: museum.bio,
-                  location: museum.location,
-                  name: museum.name,
-                  paintings: [...museum.paintings, data]
+                  id: muse.id,
+                  bio: muse.bio,
+                  location: muse.location,
+                  name: muse.name,
+                  paintings: [...muse.paintings, data]
                 }
               } else {
                 return muse
@@ -102,7 +101,7 @@ function App() {
       });
   };
 
-  function handleEditPainting(newPainting, setIsLoading, setErrors, onReveal) {
+  function handleEditPainting(newPainting, oldMuseumId, setIsLoading, setErrors, onReveal) {
     fetch(`/paintings/${newPainting.id}`, {
       method: "PATCH",
       headers: {
@@ -128,19 +127,26 @@ function App() {
                 return paint
               }
             });
-            const newMuseum = museums.find((muse) => muse.id === data.museum_id);
             const filteredMuseums = museums.map((muse) => {
               if (muse.id === data.museum_id) {
                 return {
-                  id: newMuseum.id,
-                  bio: newMuseum.bio,
-                  location: newMuseum.location,
-                  name: newMuseum.name,
-                  paintings: [...newMuseum.paintings, data]
+                  id: muse.id,
+                  bio: muse.bio,
+                  location: muse.location,
+                  name: muse.name,
+                  paintings: [...muse.paintings, data]
+                }
+              } else if (muse.id === oldMuseumId) {
+                return {
+                  id: muse.id,
+                  bio: muse.bio,
+                  location: muse.location,
+                  name: muse.name,
+                  paintings: muse.paintings.filter((paint) => paint.id !== newPainting.id)
                 }
               } else {
                 return muse
-              }
+              };
             });
 
             //Grab old museum id, remove painting using else if (muse.id === oldMuseum.id)

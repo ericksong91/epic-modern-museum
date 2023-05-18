@@ -31,7 +31,7 @@ function EditPaintingForm({ painting, museums, museum, onReveal, onEditPainting,
             museum_id: museumObj.id
         };
 
-        onEditPainting(paintObj, setIsLoading, setErrors, onReveal);
+        onEditPainting(paintObj, painting.museum_id, setIsLoading, setErrors, onReveal);
     }
 
     return (
