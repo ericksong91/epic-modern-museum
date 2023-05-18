@@ -18,15 +18,14 @@ function NewPaintingForm({ museums, onShow, onNewPainting }) {
     function handleSubmit(e) {
         e.preventDefault();
         setIsLoading(true);
-        const museumObj = museums.filter((muse) => muse.name === selectMuseum)
-
+        const museumObj = museums.find((muse) => muse.name === selectMuseum);
         const paintObj = {
             name,
             bio,
             img_url: image,
             year,
-            museum_id: museumObj[0].id
-        }
+            museum_id: museumObj.id
+        };
 
         onNewPainting(paintObj, setIsLoading, setErrors, cleanUp);
 

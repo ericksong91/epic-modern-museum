@@ -36,12 +36,10 @@ function App() {
             // setPaintings(paintingList);
           })
         } else {
-          r.json().then((error) => alert(error.errors))
-        }
-      })
-  }, [])
-
-  //Happens only once on page load, don't need to update museum paintings state every time, only paintings
+          r.json().then((error) => alert(error.errors));
+        };
+      });
+  }, []);
 
   function handleNewPainting(newPainting, setIsLoading, setErrors, cleanUp) {
     fetch('/paintings', {
@@ -100,9 +98,9 @@ function App() {
           })
         } else {
           r.json().then((error) => setErrors(error.errors));
-        }
-      })
-  }
+        };
+      });
+  };
 
   function handleEditPainting(newPainting, setIsLoading, setErrors, onReveal) {
     fetch(`/paintings/${newPainting.id}`, {

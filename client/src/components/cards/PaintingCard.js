@@ -11,7 +11,7 @@ function PaintingCard({ paint, artists }) {
 
     if (artist === null) {
         return <div>Loading...</div>
-    }
+    };
 
     return (
         <Card sx={{ maxWidth: 345 }}>

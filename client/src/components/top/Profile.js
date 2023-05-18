@@ -7,28 +7,30 @@ import { Navigate } from 'react-router-dom';
 import { Grid, Container, Button } from '@mui/material';
 import { Card, CardContent } from '@mui/material';
 
-function Profile({ museums, paintings, artists, onNewPainting, setPaintings }) {
+function Profile({ museums, artists, onNewPainting }) {
     const [show, setShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
     const { user, onDelete } = useContext(UserContext);
-
-    if (!user) {
+    
+    if (museums.length === 0) {
+        return <div>Loading...</div>;
+    } else if (!user) {
         return <div></div>;
-    }
-
-    const userPaintings = paintings.filter((paint) => paint.user_id === user.id).map((paint) => {
-        return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} artists={artists} /></Grid>
-    });
+    };
 
     const userMuseums = user.museums.map((muse) => {
         return <Grid item xs={12} sm={6} md={4} key={muse.id}><MuseumCard museum={muse} /></Grid>
     });
 
+    const userPaintings = user.paintings.filter((paint) => paint.user_id === user.id).map((paint) => {
+        return <Grid item xs={12} sm={6} md={4} key={paint.id}><PaintingCard paint={paint} artists={artists} /></Grid>
+    });
+
     function handleDelete() {
         setIsLoading(true);
         if (window.confirm("Are you sure you want to delete your account?")) {
-            onDelete(user.id, paintings, setErrors, setIsLoading, setPaintings);
+            onDelete(user.id, museums.paintings, setErrors, setIsLoading);
             <Navigate replace to="/" />;
         } else {
             setIsLoading(false);
