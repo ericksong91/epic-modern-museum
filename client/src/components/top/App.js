@@ -161,9 +161,9 @@ function App() {
           })
         } else {
           r.json().then((error) => setErrors(error.errors));
-        }
-      })
-  }
+        };
+      });
+  };
 
   function handleDeletePainting(painting, setErrors, navigate) {
     fetch(`/paintings/${painting.id}`, {
@@ -172,8 +172,7 @@ function App() {
       .then((r) => {
         if (r.ok) {
           const museum = museums.find((muse) => muse.id === painting.museum_id);
-          // const updatedPaintings = paintings.filter((paint) => paint.id !== painting.id);
-          const updatedUserPaintings = user.paintings.filter((paint) => paint.id !== painting.id)
+          const updatedUserPaintings = user.paintings.filter((paint) => paint.id !== painting.id);
           const filteredMuseums = museums.map((muse) => {
             if (muse.id === painting.museum_id) {
               return {
@@ -182,17 +181,17 @@ function App() {
                 location: museum.location,
                 name: museum.name,
                 paintings: museum.paintings.filter((paint) => paint.id !== painting.id)
-              }
+              };
             } else {
-              return muse
-            }
+              return muse;
+            };
           });
 
           const userMuseumsNew = [];
 
           museums.forEach((museum) => {
-            updatedUserPaintings.forEach((muse) => {
-              if (muse.museum_id === museum.id) {
+            updatedUserPaintings.forEach((paint) => {
+              if (paint.museum_id === museum.id) {
                 return userMuseumsNew.push(museum);
               };
             });
@@ -208,17 +207,16 @@ function App() {
             museums: uniqueUserMuseums,
             paintings: updatedUserPaintings,
             username: user.username
-          }
+          };
 
           setUser(userObj);
           setMuseums(filteredMuseums);
-          // setPaintings(updatedPaintings);
           navigate(-1);
         } else {
           r.json().then((error) => setErrors(error.errors));
-        }
-      })
-  }
+        };
+      });
+  };
 
   return (
     <div className="App">
@@ -230,19 +228,12 @@ function App() {
             <Profile museums={museums} artists={artists}
               onNewPainting={handleNewPainting} />
           } />
-          {/* <Profile museums={museums} paintings={paintings} artists={artists}
-            onNewPainting={handleNewPainting} setPaintings={setPaintings} />
-          } /> */}
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} artists={artists} />} />
-          {/* <Route path='/locations/:id' element={<MuseumProfile museums={museums} paintings={paintings} artists={artists} />} /> */}
           <Route path='/paintings/:id' element={
             <PaintingProfile museums={museums} artists={artists}
               onEditPainting={handleEditPainting} onDeletePainting={handleDeletePainting} />
           } />
-          {/* <PaintingProfile paintings={paintings} museums={museums} artists={artists}
-            onEditPainting={handleEditPainting} onDeletePainting={handleDeletePainting} />
-          } /> */}
           <Route path='/login' element={<LoginForm />} />
           <Route path='/signup' element={<SignupForm />} />
         </Routes>
