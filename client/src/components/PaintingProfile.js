@@ -29,34 +29,29 @@ function PaintingProfile({ museums, artists, onEditPainting, onDeletePainting })
     //     :
     //     artists.find((artist) => artist.id === painting.user_id) 
 
-    useEffect(()=>{
-        museums.length === 0 ?
-        <div></div>
-        :
-        museums.map((muse) => muse.paintings.forEach((paint) => {
-            if (paint.id === index) {
-                setPainting(paint);
-                setMuseum(muse);
-                setArtist(artists.find((artist) => artist.id === paint.user_id));
-            };
-        }));
-    },[museums, artists, index])
+    useEffect(() => {
+        if (museums.length !== 0 && artists.length !== 0) {
+            museums.forEach((muse) => muse.paintings.forEach((paint) => {
+                if (paint.id === index) {
+                    setPainting(paint);
+                    setMuseum(muse);
+                    setArtist(artists.find((artist) => artist.id === paint.user_id));
+                };
+            }));
+        };
+    }, [museums, artists, index])
 
     useEffect(() => {
         if (user) {
             if (user.id === painting.user_id) {
                 setShowEdit(true);
-            }
-        }
+            };
+        };
     }, [user, painting.user_id]);
 
-    if (Object.keys(painting).length === 0) {
-        return <div></div>
-    }
-
-    if (artist === undefined || museums.length === 0) {
+    if (Object.keys(painting).length === 0 || museums.length === 0) {
         return <div>Loading...</div>
-    }
+    };
 
     return (
         <div className="PaintingProfile">
