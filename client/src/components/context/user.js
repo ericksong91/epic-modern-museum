@@ -5,7 +5,7 @@ const UserContext = React.createContext();
 function UserProvider({ children }) {
     const [user, setUser] = useState(null);
     const [artists, setArtists] = useState([]);
-    
+
     useEffect(() => {
         fetch('/me')
             .then(res => {
@@ -81,37 +81,33 @@ function UserProvider({ children }) {
             })
     };
 
-    function onDelete(id, paintings, setErrors, setIsLoading, setPaintings) {
+    function onDelete(id, museums, setErrors, setIsLoading, setMuseums) {
         fetch(`/users/${id}`, {
             method: 'DELETE'
         })
             .then((r) => {
                 setIsLoading(false);
                 if (r.ok) {
-                    const newPaintingList = [];
-                    const filteredArtists = [];
-                    artists.forEach((artist) => {
-                        if (artist.id === id) {
-                            return
-                        } else {
-                            return filteredArtists.push(artist)
-                        }
+                    const filteredArtists = artists.filter((artist) => artist.id !== id);
+                    const filteredMuseums = museums.map((muse) => {
+                        {
+                            return {
+                                id: muse.id,
+                                bio: muse.bio,
+                                location: muse.location,
+                                name: muse.name,
+                                paintings: muse.paintings.filter((paint) => paint.user_id !== id)
+                            };
+                        };
                     });
-                    filteredArtists.forEach((artist) => {
-                        paintings.forEach((painting) => {
-                            if (painting.user_id === artist.id) {
-                                return newPaintingList.push(painting)
-                            }
-                        })
-                    });
-                    newPaintingList.sort((a, b) => a.id - b.id);
+
                     setUser(null);
+                    setMuseums(filteredMuseums);
                     setArtists(filteredArtists);
-                    setPaintings(newPaintingList);
                 } else {
                     r.json().then((error) => setErrors(error.errors));
-                }
-            })
+                };
+            });
     };
 
     return (

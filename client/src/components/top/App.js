@@ -171,16 +171,15 @@ function App() {
     })
       .then((r) => {
         if (r.ok) {
-          const museum = museums.find((muse) => muse.id === painting.museum_id);
           const updatedUserPaintings = user.paintings.filter((paint) => paint.id !== painting.id);
           const filteredMuseums = museums.map((muse) => {
             if (muse.id === painting.museum_id) {
               return {
-                id: museum.id,
-                bio: museum.bio,
-                location: museum.location,
-                name: museum.name,
-                paintings: museum.paintings.filter((paint) => paint.id !== painting.id)
+                id: muse.id,
+                bio: muse.bio,
+                location: muse.location,
+                name: muse.name,
+                paintings: muse.paintings.filter((paint) => paint.id !== painting.id)
               };
             } else {
               return muse;
@@ -226,7 +225,7 @@ function App() {
           <Route path='/' element={<Homepage />} />
           <Route path='/profile' element={
             <Profile museums={museums} artists={artists}
-              onNewPainting={handleNewPainting} />
+              onNewPainting={handleNewPainting} setMuseums={setMuseums} />
           } />
           <Route path='/locations' element={<Museums museums={museums} />} />
           <Route path='/locations/:id' element={<MuseumProfile museums={museums} artists={artists} />} />

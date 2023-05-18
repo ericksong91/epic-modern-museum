@@ -7,7 +7,7 @@ import { Navigate } from 'react-router-dom';
 import { Grid, Container, Button } from '@mui/material';
 import { Card, CardContent } from '@mui/material';
 
-function Profile({ museums, artists, onNewPainting }) {
+function Profile({ museums, artists, onNewPainting, setMuseums }) {
     const [show, setShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState([]);
@@ -30,7 +30,7 @@ function Profile({ museums, artists, onNewPainting }) {
     function handleDelete() {
         setIsLoading(true);
         if (window.confirm("Are you sure you want to delete your account?")) {
-            onDelete(user.id, museums.paintings, setErrors, setIsLoading);
+            onDelete(user.id, museums, setErrors, setIsLoading, setMuseums);
             <Navigate replace to="/" />;
         } else {
             setIsLoading(false);
