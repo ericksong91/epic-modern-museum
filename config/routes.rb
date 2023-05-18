@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   #General Resources
-  resources :paintings, only: [:index, :create, :update, :destroy]
+  resources :paintings, only: [:create, :update, :destroy]
   resources :museums, only: [:index]
   resources :users, only: [:index, :destroy]
 
