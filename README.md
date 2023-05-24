@@ -38,15 +38,15 @@ The users have the ability to edit and delete their own paintings but they are n
 
 Creating a new user:
 
-![Creating a new user](./src/images/frontend_1.gif)
+![Creating a new user](images/CreatingUser.gif)
 
-Editing a user's name:
+Viewing Museums:
 
-![Editing a user's name](./src/images/frontend_2.gif)
+![Viewing Museums](images/ViewingMuseums.gif)
 
-Modifying characters:
+Modifying Paintings:
 
-![Modifying Characters](./src/images/frontend_3.gif)
+![Editing Images](images/EditingImages.gif)
 
 ## Project Status
 
@@ -54,7 +54,9 @@ Modifying characters:
 
 ## Planned Features
 
-1. 
+1. Ability to directly upload images
+
+2. View other artist's profiles
 
 ## Credits  
 
