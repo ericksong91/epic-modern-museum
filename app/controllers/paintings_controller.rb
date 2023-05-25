@@ -1,9 +1,4 @@
 class PaintingsController < ApplicationController
-    # def index
-    #     paintings = Painting.all 
-    #     render json: paintings
-    # end
-
     def create
         if find_user
             user = User.find(session[:user_id])
