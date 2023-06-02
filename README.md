@@ -58,6 +58,8 @@ Modifying Paintings:
 
 2. View other artist's profiles
 
+3. Ability for Museum Curators to add Museums and approve paintings
+
 ## Credits  
 
 - [Open ClipArt](https://openclipart.org) for default seed images
