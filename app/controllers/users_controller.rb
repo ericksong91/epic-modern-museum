@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         if user
             render json: user, status: :created, serializer: UserProfileSerializer
         else
-            render json: { errors: "Not authorized" }, status: :unauthorized
+            render_not_authorized_response
         end
     end
 
@@ -27,11 +27,15 @@ class UsersController < ApplicationController
             user.destroy
             head :no_content
         else
-            render json:  { errors: "Not authorized"}, status: :unauthorized
+            render_not_authorized_response
         end
     end
 
-    private 
+    private
+
+    def render_not_authorized_response
+        render json:  { "errors": "Not authorized" }, status: :unauthorized
+    end
 
     def user_params
         params.permit(:username, :password, :password_confirmation, :bio)

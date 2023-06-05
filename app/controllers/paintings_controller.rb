@@ -7,7 +7,7 @@ class PaintingsController < ApplicationController
             painting = user.paintings.create!(paint_params)
             render json: painting, status: :created
         else
-            render json: { "errors": "Not authorized" }, status: :unauthorized
+            render_not_authorized_response
         end
     end
 
@@ -20,10 +20,10 @@ class PaintingsController < ApplicationController
                 painting.update(paint_params)
                 render json: painting, status: :accepted
             else
-                render json:  { "errors": "Not authorized" }, status: :unauthorized
+                render_not_authorized_response
             end
         else
-            render json:  { "errors": "Not authorized" }, status: :unauthorized
+            render_not_authorized_response
         end
     end
 
@@ -36,14 +36,18 @@ class PaintingsController < ApplicationController
                 painting.destroy
                 head :no_content
             else
-                render json:  { "errors": "Not authorized" }, status: :unauthorized
+                render_not_authorized_response
             end
         else
-            render json:  { "errors": "Not authorized" }, status: :unauthorized
+            render_not_authorized_response
         end
     end
 
     private
+
+    def render_not_authorized_response
+        render json:  { "errors": "Not authorized" }, status: :unauthorized
+    end
 
     def render_record_not_found_response
         render json: { error: "Painting not found" }, status: :not_found
