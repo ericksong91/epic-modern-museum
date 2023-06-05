@@ -1,11 +1,13 @@
 class PaintingsController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, with: :render_record_not_found_response
+
     def create
         if find_user
             user = User.find(session[:user_id])
             painting = user.paintings.create!(paint_params)
             render json: painting, status: :created
         else
-            render json: {"errors": ["Not authorized"], status: :unauthorized}
+            render json: { "errors": "Not authorized" }, status: :unauthorized
         end
     end
 
@@ -18,10 +20,10 @@ class PaintingsController < ApplicationController
                 painting.update(paint_params)
                 render json: painting, status: :accepted
             else
-                render json:  {"errors": ["Not authorized"], status: :unauthorized}
+                render json:  { "errors": "Not authorized" }, status: :unauthorized
             end
         else
-            render json:  {"errors": ["Not authorized"], status: :unauthorized}
+            render json:  { "errors": "Not authorized" }, status: :unauthorized
         end
     end
 
@@ -34,14 +36,18 @@ class PaintingsController < ApplicationController
                 painting.destroy
                 head :no_content
             else
-                render json:  {"errors": ["Not authorized"], status: :unauthorized}
+                render json:  { "errors": "Not authorized" }, status: :unauthorized
             end
         else
-            render json:  {"errors": ["Not authorized"], status: :unauthorized}
+            render json:  { "errors": "Not authorized" }, status: :unauthorized
         end
     end
 
     private
+
+    def render_record_not_found_response
+        render json: { error: "Painting not found" }, status: :not_found
+    end
 
     def find_user
         session[:user_id]

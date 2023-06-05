@@ -16,7 +16,7 @@ class UsersController < ApplicationController
         if user
             render json: user, status: :created, serializer: UserProfileSerializer
         else
-            render json: { errors: "No user found" }, status: :unauthorized
+            render json: { errors: "Not authorized" }, status: :unauthorized
         end
     end
 
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
             user.destroy
             head :no_content
         else
-            render json:  {"errors": ["Not authorized"], status: :unauthorized}
+            render json:  { errors: "Not authorized"}, status: :unauthorized
         end
     end
 
